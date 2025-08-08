@@ -8,9 +8,11 @@ import 'package:source_byte_bot/core/model/bot/response/init/init_response_model
 import 'package:source_byte_bot/core/model/bot/state/bot_state.dart';
 import 'package:source_byte_bot/core/network/network_status.dart';
 import 'package:source_byte_bot/src/data/bot_remote_repo.dart';
+import 'package:source_byte_bot/theme/colors.dart';
 import 'package:source_byte_bot/theme/source_byte_theme.dart';
 import 'package:source_byte_bot/theme/theme_manager.dart';
 import 'package:source_byte_bot/util/enum/theme_mode_enum.dart';
+import 'package:source_byte_bot/util/extension/string_extension.dart';
 
 final botProvider = StateNotifierProvider<BotNotifierProvider, BotState>(
   (ref) => BotNotifierProvider(ref),
@@ -28,6 +30,15 @@ class BotNotifierProvider extends StateNotifier<BotState> {
   String? get initErrorMessage => state.initErrorMessage;
 
   InitResponseModel? get initResponseModel => state.initResponseModel;
+
+  String get title => initResponseModel?.botConfig?.header ?? 'Hello,';
+
+  String get subTitle =>
+      initResponseModel?.botConfig?.greetingMessage ?? 'Welcome.';
+
+  int get textColor =>
+      initResponseModel?.botConfig?.textColor?.toColor ??
+      AppColors.white.toARGB32();
 
   ThemeModeEnum get themeMode => state.themeMode;
 

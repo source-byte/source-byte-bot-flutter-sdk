@@ -8,13 +8,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:source_byte_bot/src/presentation/provider/bot_provider.dart';
 import 'package:source_byte_bot/src/presentation/widget/bot/health_care_bot.dart';
 import 'package:source_byte_bot/src/presentation/widget/bot/retail_bot.dart';
+import 'package:source_byte_bot/theme/colors.dart';
 import 'package:source_byte_bot/util/enum/theme_mode_enum.dart';
 
-///[userId] and [botId] is the id which is needed to initialize the bot
-///
 class SourceByte extends ConsumerStatefulWidget {
   final String userId, botId;
-  const SourceByte({super.key, required this.userId, required this.botId});
+  final double? width, height;
+  const SourceByte({
+    super.key,
+    required this.userId,
+    required this.botId,
+    this.width,
+    this.height,
+  });
 
   @override
   ConsumerState<SourceByte> createState() => _SourceByteState();
@@ -31,13 +37,16 @@ class _SourceByteState extends ConsumerState<SourceByte> {
   Widget child(ThemeModeEnum mode) {
     switch (mode) {
       case ThemeModeEnum.retail:
-        return RetailBot();
+        return RetailBot(width: widget.width, height: widget.height);
 
       case ThemeModeEnum.healthCare:
         return HealthCareBot();
 
+      case ThemeModeEnum.others:
+        return RetailBot(width: widget.width, height: widget.height);
+
       default:
-        return RetailBot();
+        return RetailBot(width: widget.width, height: widget.height);
     }
   }
 
@@ -56,7 +65,29 @@ class _SourceByteState extends ConsumerState<SourceByte> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: provider.themeData,
-      home: Scaffold(body: child(provider.themeMode)),
+      home: Scaffold(
+        backgroundColor: AppColors.white,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (provider.isInitLoading) ...[
+              Expanded(child: Center(child: CircularProgressIndicator())),
+            ] else if (!provider.isInitLoading && !provider.isInitError) ...[
+              child(provider.themeMode),
+            ] else ...[
+              Text(
+                provider.initErrorMessage ?? 'Something went wrong',
+                style: TextStyle(
+                  color: Color(provider.textColor),
+                  fontWeight: FontWeight.w600,
+                  fontSize: 20,
+                  fontFamily: "Gilroy",
+                ),
+              ),
+            ],
+          ],
+        ),
+      ),
     );
   }
 }
