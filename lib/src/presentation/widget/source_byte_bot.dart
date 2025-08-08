@@ -1,6 +1,8 @@
 // Copyright (c) 2025, Indo-Sakura Software Pvt Ltd. All rights reserved.
 // Created By Suresh M, 07/08/2025
 
+library;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:source_byte_bot/src/presentation/provider/bot_provider.dart';
