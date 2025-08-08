@@ -10,15 +10,15 @@ import 'package:source_byte_bot/theme/source_byte_theme.dart';
 
 ///[userId] and [botId] is the id which is needed to initialize the bot
 ///
-class SourceByteBot extends ConsumerStatefulWidget {
+class SourceByte extends ConsumerStatefulWidget {
   final String userId, botId;
-  const SourceByteBot({super.key, required this.userId, required this.botId});
+  const SourceByte({super.key, required this.userId, required this.botId});
 
   @override
-  ConsumerState<SourceByteBot> createState() => _SourceByteBotState();
+  ConsumerState<SourceByte> createState() => _SourceByteState();
 }
 
-class _SourceByteBotState extends ConsumerState<SourceByteBot> {
+class _SourceByteState extends ConsumerState<SourceByte> {
   late BotNotifierProvider provider;
   ThemeData themeData = SourceByteTheme.others;
 
@@ -40,8 +40,9 @@ class _SourceByteBotState extends ConsumerState<SourceByteBot> {
     ref.watch(botProvider);
     provider = ref.read(botProvider.notifier);
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: themeData,
-      home: Column(children: [Text('data')]),
+      home: Scaffold(body: Column(children: [Text('data')])),
     );
   }
 }

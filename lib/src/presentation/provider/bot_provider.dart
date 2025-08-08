@@ -33,7 +33,11 @@ class BotNotifierProvider extends StateNotifier<BotState> {
       isInitError: false,
     );
 
-    var requestModel = InitRequestModel(botId: botId, userId: userId);
+    var requestModel = InitRequestModel(
+      botId: botId,
+      userId: userId,
+      deviceInfo: DeviceInfo(),
+    );
 
     var result = await ref
         .read(botRemoteRepo)
