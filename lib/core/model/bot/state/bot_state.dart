@@ -16,5 +16,6 @@ class BotState with _$BotState {
     InitResponseModel? initResponseModel,
     @Default(ThemeModeEnum.others) ThemeModeEnum themeMode,
     ThemeData? themeData,
+    @Default(false) bool showChat,
   }) = _BotState;
 }

@@ -24,6 +24,7 @@ mixin _$BotState {
       throw _privateConstructorUsedError;
   ThemeModeEnum get themeMode => throw _privateConstructorUsedError;
   ThemeData? get themeData => throw _privateConstructorUsedError;
+  bool get showChat => throw _privateConstructorUsedError;
 
   /// Create a copy of BotState
   /// with the given fields replaced by the non-null parameter values.
@@ -44,6 +45,7 @@ abstract class $BotStateCopyWith<$Res> {
     InitResponseModel? initResponseModel,
     ThemeModeEnum themeMode,
     ThemeData? themeData,
+    bool showChat,
   });
 
   $InitResponseModelCopyWith<$Res>? get initResponseModel;
@@ -70,6 +72,7 @@ class _$BotStateCopyWithImpl<$Res, $Val extends BotState>
     Object? initResponseModel = freezed,
     Object? themeMode = null,
     Object? themeData = freezed,
+    Object? showChat = null,
   }) {
     return _then(
       _value.copyWith(
@@ -97,6 +100,10 @@ class _$BotStateCopyWithImpl<$Res, $Val extends BotState>
                 ? _value.themeData
                 : themeData // ignore: cast_nullable_to_non_nullable
                       as ThemeData?,
+            showChat: null == showChat
+                ? _value.showChat
+                : showChat // ignore: cast_nullable_to_non_nullable
+                      as bool,
           )
           as $Val,
     );
@@ -133,6 +140,7 @@ abstract class _$$BotStateImplCopyWith<$Res>
     InitResponseModel? initResponseModel,
     ThemeModeEnum themeMode,
     ThemeData? themeData,
+    bool showChat,
   });
 
   @override
@@ -159,6 +167,7 @@ class __$$BotStateImplCopyWithImpl<$Res>
     Object? initResponseModel = freezed,
     Object? themeMode = null,
     Object? themeData = freezed,
+    Object? showChat = null,
   }) {
     return _then(
       _$BotStateImpl(
@@ -186,6 +195,10 @@ class __$$BotStateImplCopyWithImpl<$Res>
             ? _value.themeData
             : themeData // ignore: cast_nullable_to_non_nullable
                   as ThemeData?,
+        showChat: null == showChat
+            ? _value.showChat
+            : showChat // ignore: cast_nullable_to_non_nullable
+                  as bool,
       ),
     );
   }
@@ -201,6 +214,7 @@ class _$BotStateImpl implements _BotState {
     this.initResponseModel,
     this.themeMode = ThemeModeEnum.others,
     this.themeData,
+    this.showChat = false,
   });
 
   @override
@@ -218,10 +232,13 @@ class _$BotStateImpl implements _BotState {
   final ThemeModeEnum themeMode;
   @override
   final ThemeData? themeData;
+  @override
+  @JsonKey()
+  final bool showChat;
 
   @override
   String toString() {
-    return 'BotState(isInitLoading: $isInitLoading, isInitError: $isInitError, initErrorMessage: $initErrorMessage, initResponseModel: $initResponseModel, themeMode: $themeMode, themeData: $themeData)';
+    return 'BotState(isInitLoading: $isInitLoading, isInitError: $isInitError, initErrorMessage: $initErrorMessage, initResponseModel: $initResponseModel, themeMode: $themeMode, themeData: $themeData, showChat: $showChat)';
   }
 
   @override
@@ -240,7 +257,9 @@ class _$BotStateImpl implements _BotState {
             (identical(other.themeMode, themeMode) ||
                 other.themeMode == themeMode) &&
             (identical(other.themeData, themeData) ||
-                other.themeData == themeData));
+                other.themeData == themeData) &&
+            (identical(other.showChat, showChat) ||
+                other.showChat == showChat));
   }
 
   @override
@@ -252,6 +271,7 @@ class _$BotStateImpl implements _BotState {
     initResponseModel,
     themeMode,
     themeData,
+    showChat,
   );
 
   /// Create a copy of BotState
@@ -271,6 +291,7 @@ abstract class _BotState implements BotState {
     final InitResponseModel? initResponseModel,
     final ThemeModeEnum themeMode,
     final ThemeData? themeData,
+    final bool showChat,
   }) = _$BotStateImpl;
 
   @override
@@ -285,6 +306,8 @@ abstract class _BotState implements BotState {
   ThemeModeEnum get themeMode;
   @override
   ThemeData? get themeData;
+  @override
+  bool get showChat;
 
   /// Create a copy of BotState
   /// with the given fields replaced by the non-null parameter values.

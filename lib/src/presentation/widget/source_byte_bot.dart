@@ -93,20 +93,22 @@ class _SourceByteState extends ConsumerState<SourceByte> {
         backgroundColor: AppColors.white,
         resizeToAvoidBottomInset: false,
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             if (provider.isInitLoading) ...[
               Expanded(child: Center(child: CircularProgressIndicator())),
             ] else if (!provider.isInitLoading && !provider.isInitError) ...[
               child(provider.themeMode),
             ] else ...[
-              Text(
-                provider.initErrorMessage ?? 'Something went wrong',
-                style: TextStyle(
-                  color: Color(provider.textColor),
-                  fontWeight: FontWeight.w600,
-                  fontSize: 20,
-                  fontFamily: "Gilroy",
+              Center(
+                child: Text(
+                  provider.initErrorMessage ?? 'Something went wrong',
+                  style: TextStyle(
+                    color: Color(provider.textColor),
+                    fontWeight: FontWeight.w600,
+                    fontSize: 20,
+                    fontFamily: "Gilroy",
+                  ),
                 ),
               ),
             ],

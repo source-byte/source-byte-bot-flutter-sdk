@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:source_byte_bot/src/presentation/provider/bot_provider.dart';
+import 'package:source_byte_bot/src/presentation/widget/bot/retail/retail_bot_chat.dart';
 import 'package:source_byte_bot/src/presentation/widget/bot/retail/retail_bot_intro.dart';
 import 'package:source_byte_bot/src/presentation/widget/bot/retail/retail_bot_login.dart';
 import 'package:source_byte_bot/util/enum/auth_type_enum.dart';
@@ -42,16 +43,18 @@ class _RetailBotState extends ConsumerState<RetailBot> {
     }
     return Column(
       children: [
-        if (provider.authType == AuthTypeEnum.closed)
+        if (provider.authType == AuthTypeEnum.open)
           RetailBotIntro(width: width, height: height)
-        else
+        else if (provider.authType == AuthTypeEnum.closed)
           RetailBotLogin(
             width: width,
             height: height,
             emailController: widget.emailController,
             passwordControlled: widget.passwordControlled,
             sendOnTap: widget.sendOnTap,
-          ),
+          )
+        else if (provider.showChat)
+          RetailBotChat(width: width, height: height),
       ],
     );
   }

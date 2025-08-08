@@ -64,6 +64,10 @@ class BotNotifierProvider extends StateNotifier<BotState> {
 
   double get minimumHeight => 375.0;
 
+  bool get showChat => state.showChat;
+
+  String? get avatarLogo => initResponseModel?.avatar?.image;
+
   Future<void> initBot({required String botId, required String userId}) async {
     state = state.copyWith(
       isInitLoading: true,

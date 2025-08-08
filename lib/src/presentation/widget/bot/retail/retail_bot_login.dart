@@ -1,10 +1,9 @@
 // Copyright (c) 2025, Indo-Sakura Software Pvt Ltd. All rights reserved.
 // Created By Suresh M, 08/08/2025
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:source_byte_bot/src/presentation/common/brand_horizontal_space.dart';
+import 'package:source_byte_bot/src/presentation/common/bot_header.dart';
 import 'package:source_byte_bot/src/presentation/common/brand_text_field.dart';
 import 'package:source_byte_bot/src/presentation/common/brand_vertical_space.dart';
 import 'package:source_byte_bot/src/presentation/common/footer_widget.dart';
@@ -41,55 +40,10 @@ class _RetailBotLoginState extends ConsumerState<RetailBotLogin> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-              children: [
-                BrandVSpace.gap60(),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: [
-                      if (provider.logo != null) ...[
-                        CachedNetworkImage(
-                          imageUrl: provider.logo!,
-                          errorWidget: (context, url, error) =>
-                              const SizedBox(),
-                          placeholder: (context, url) => SizedBox(),
-                          width: 35,
-                          height: 35,
-                          fit: BoxFit.cover,
-                        ),
-                      ],
-                      BrandHSpace.gap10(),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              provider.title,
-                              style: TextStyle(
-                                color: AppColors.black,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 20,
-                                fontFamily: "Gilroy",
-                              ),
-                            ),
-                            Text(
-                              provider.subTitle,
-                              style: TextStyle(
-                                color: AppColors.black.withAlpha(200),
-                                fontSize: 14,
-                                fontFamily: "Gilroy",
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                BrandVSpace.gap10(),
-                Divider(color: AppColors.greyF6),
-              ],
+            BotHeader(
+              title: provider.title,
+              subTitle: provider.subTitle,
+              logo: provider.logo,
             ),
             Spacer(),
             Padding(
