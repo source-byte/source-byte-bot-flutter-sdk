@@ -44,6 +44,17 @@ class BotNotifierProvider extends StateNotifier<BotState> {
 
   ThemeData get themeData => state.themeData ?? SourceByteTheme.others();
 
+  bool get isBgImageEnable =>
+      initResponseModel?.botConfig?.isBackgroundImageEnabled == true &&
+      initResponseModel?.backgroundImage?.image != null;
+
+  String get bgImage => initResponseModel!.backgroundImage!.image!;
+
+  bool get showFooter =>
+      initResponseModel?.botConfig?.isPoweredByEnabled == true;
+
+  String? get logo => initResponseModel?.botConfig?.logo;
+
   Future<void> initBot({required String botId, required String userId}) async {
     state = state.copyWith(
       isInitLoading: true,

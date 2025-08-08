@@ -60,7 +60,7 @@ class BotConfig with _$BotConfig {
   const factory BotConfig({
     @JsonKey(name: "id") String? id,
     @JsonKey(name: "bot") String? bot,
-    @JsonKey(name: "logo") dynamic logo,
+    @JsonKey(name: "logo") String? logo,
     @JsonKey(name: "background_color") String? backgroundColor,
     @JsonKey(name: "action_color") String? actionColor,
     @JsonKey(name: "text_color") String? textColor,

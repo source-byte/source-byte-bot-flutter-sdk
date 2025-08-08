@@ -27,12 +27,15 @@ class QuestionTileWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                message ?? 'hi',
-                style: TextStyle(
-                  color: AppColors.black,
-                  fontSize: 16,
-                  fontFamily: "Gilroy",
+              Flexible(
+                child: Text(
+                  message ?? 'hi',
+                  style: TextStyle(
+                    color: AppColors.black,
+                    fontSize: 16,
+                    fontFamily: "Gilroy",
+                  ),
+                  maxLines: 3,
                 ),
               ),
               Icon(Icons.keyboard_arrow_right_rounded, color: AppColors.black),

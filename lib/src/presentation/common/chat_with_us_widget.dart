@@ -25,7 +25,6 @@ class ChatWithUsWidget extends StatelessWidget {
       },
       child: Container(
         width: width,
-        height: 100,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: AppColors.white,
@@ -38,7 +37,7 @@ class ChatWithUsWidget extends StatelessWidget {
           ],
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
