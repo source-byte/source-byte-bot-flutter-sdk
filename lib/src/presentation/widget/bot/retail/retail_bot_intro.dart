@@ -1,9 +1,8 @@
 // Copyright (c) 2025, Indo-Sakura Software Pvt Ltd. All rights reserved.
 // Created By Suresh M, 08/08/2025
-library;
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:source_byte_bot/src/presentation/common/brand_vertical_space.dart';
 import 'package:source_byte_bot/src/presentation/common/chat_with_us_widget.dart';
@@ -11,41 +10,36 @@ import 'package:source_byte_bot/src/presentation/common/footer_widget.dart';
 import 'package:source_byte_bot/src/presentation/common/question_tile_widget.dart';
 import 'package:source_byte_bot/src/presentation/provider/bot_provider.dart';
 import 'package:source_byte_bot/theme/colors.dart';
-import 'package:source_byte_bot/util/extension/context_extension.dart';
 
-class RetailBot extends ConsumerStatefulWidget {
-  final double? width, height;
-  const RetailBot({super.key, this.width, this.height});
+class RetailBotIntro extends ConsumerStatefulWidget {
+  const RetailBotIntro({super.key, required this.width, required this.height});
+
+  final double width;
+  final double height;
 
   @override
-  ConsumerState<RetailBot> createState() => _RetailBotState();
+  ConsumerState<RetailBotIntro> createState() => _RetailBotIntroState();
 }
 
-class _RetailBotState extends ConsumerState<RetailBot> {
+class _RetailBotIntroState extends ConsumerState<RetailBotIntro> {
   late BotNotifierProvider provider;
-
   @override
   Widget build(BuildContext context) {
     ref.watch(botProvider);
     provider = ref.read(botProvider.notifier);
-    double width = widget.width ?? context.screenWidth;
-    double height = widget.height ?? context.screenHeight;
-    if (height < 350) {
-      height = 350;
-    }
     return SizedBox(
-      width: width,
-      height: height,
+      width: widget.width,
+      height: widget.height,
       child: Column(
         children: [
           SizedBox(
-            width: width,
-            height: height / 2,
+            width: widget.width,
+            height: widget.height / 2,
             child: Stack(
               children: [
                 Container(
-                  width: width,
-                  height: (height / 2) - 55,
+                  width: widget.width,
+                  height: (widget.height / 2) - 55,
                   decoration: BoxDecoration(
                     color: Theme.of(context).primaryColor,
                   ),
@@ -98,8 +92,8 @@ class _RetailBotState extends ConsumerState<RetailBot> {
                     child: Opacity(
                       opacity: 0.08,
                       child: SizedBox(
-                        width: width,
-                        height: (height / 2) - 55,
+                        width: widget.width,
+                        height: (widget.height / 2) - 55,
                         child: CachedNetworkImage(
                           imageUrl: provider.bgImage,
                           fit: BoxFit.cover,
@@ -110,7 +104,7 @@ class _RetailBotState extends ConsumerState<RetailBot> {
                     ),
                   ),
                 Positioned(
-                  top: (height / 2) - 90,
+                  top: (widget.height / 2) - 90,
                   left: 26,
                   right: 26,
                   child: ChatWithUsWidget(),
@@ -124,6 +118,7 @@ class _RetailBotState extends ConsumerState<RetailBot> {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: ListView.builder(
                   shrinkWrap: true,
+                  padding: EdgeInsets.zero,
                   itemCount:
                       provider.initResponseModel?.conversationStarters!.length,
                   itemBuilder: (context, index) {

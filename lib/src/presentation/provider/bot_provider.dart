@@ -11,6 +11,7 @@ import 'package:source_byte_bot/src/data/bot_remote_repo.dart';
 import 'package:source_byte_bot/theme/colors.dart';
 import 'package:source_byte_bot/theme/source_byte_theme.dart';
 import 'package:source_byte_bot/theme/theme_manager.dart';
+import 'package:source_byte_bot/util/enum/auth_type_enum.dart';
 import 'package:source_byte_bot/util/enum/theme_mode_enum.dart';
 import 'package:source_byte_bot/util/extension/string_extension.dart';
 
@@ -54,6 +55,14 @@ class BotNotifierProvider extends StateNotifier<BotState> {
       initResponseModel?.botConfig?.isPoweredByEnabled == true;
 
   String? get logo => initResponseModel?.botConfig?.logo;
+
+  AuthTypeEnum get authType =>
+      (initResponseModel?.botConfig?.authenticationType ==
+          AuthTypeEnum.open.name)
+      ? AuthTypeEnum.open
+      : AuthTypeEnum.closed;
+
+  double get minimumHeight => 375.0;
 
   Future<void> initBot({required String botId, required String userId}) async {
     state = state.copyWith(

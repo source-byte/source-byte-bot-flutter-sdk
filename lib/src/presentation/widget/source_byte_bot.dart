@@ -6,8 +6,8 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:source_byte_bot/src/presentation/provider/bot_provider.dart';
-import 'package:source_byte_bot/src/presentation/widget/bot/health_care_bot.dart';
-import 'package:source_byte_bot/src/presentation/widget/bot/retail_bot.dart';
+import 'package:source_byte_bot/src/presentation/widget/bot/health/health_care_bot.dart';
+import 'package:source_byte_bot/src/presentation/widget/bot/retail/retail_bot.dart';
 import 'package:source_byte_bot/theme/colors.dart';
 import 'package:source_byte_bot/util/enum/theme_mode_enum.dart';
 
@@ -29,6 +29,12 @@ class SourceByte extends ConsumerStatefulWidget {
 class _SourceByteState extends ConsumerState<SourceByte> {
   late BotNotifierProvider provider;
 
+  TextEditingController emailController = TextEditingController();
+
+  TextEditingController passwordControlled = TextEditingController();
+
+  Future<void> loginOnTap() async {}
+
   ///[init] Defining the bot with bot config
   Future<void> init() async {
     await provider.initBot(botId: widget.botId, userId: widget.userId);
@@ -37,16 +43,34 @@ class _SourceByteState extends ConsumerState<SourceByte> {
   Widget child(ThemeModeEnum mode) {
     switch (mode) {
       case ThemeModeEnum.retail:
-        return RetailBot(width: widget.width, height: widget.height);
+        return RetailBot(
+          width: widget.width,
+          height: widget.height,
+          emailController: emailController,
+          passwordControlled: passwordControlled,
+          sendOnTap: loginOnTap,
+        );
 
       case ThemeModeEnum.healthCare:
         return HealthCareBot();
 
       case ThemeModeEnum.others:
-        return RetailBot(width: widget.width, height: widget.height);
+        return RetailBot(
+          width: widget.width,
+          height: widget.height,
+          emailController: emailController,
+          passwordControlled: passwordControlled,
+          sendOnTap: loginOnTap,
+        );
 
       default:
-        return RetailBot(width: widget.width, height: widget.height);
+        return RetailBot(
+          width: widget.width,
+          height: widget.height,
+          emailController: emailController,
+          passwordControlled: passwordControlled,
+          sendOnTap: loginOnTap,
+        );
     }
   }
 
@@ -67,6 +91,7 @@ class _SourceByteState extends ConsumerState<SourceByte> {
       theme: provider.themeData,
       home: Scaffold(
         backgroundColor: AppColors.white,
+        resizeToAvoidBottomInset: false,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

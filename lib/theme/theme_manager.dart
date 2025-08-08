@@ -10,7 +10,7 @@ abstract class ThemeManager {
   static ThemeData them({ThemeModeEnum? mode, String? primaryColor}) {
     switch (mode) {
       case ThemeModeEnum.others:
-        return SourceByteTheme.retail(primaryColor: primaryColor?.toColor);
+        return SourceByteTheme.others(primaryColor: primaryColor?.toColor);
       case ThemeModeEnum.retail:
         return SourceByteTheme.retail(primaryColor: primaryColor?.toColor);
       case ThemeModeEnum.banking:
@@ -24,7 +24,7 @@ abstract class ThemeManager {
       case ThemeModeEnum.enterprise:
         return SourceByteTheme.enterprise(primaryColor: primaryColor?.toColor);
       default:
-        return SourceByteTheme.enterprise(primaryColor: primaryColor?.toColor);
+        return SourceByteTheme.others(primaryColor: primaryColor?.toColor);
     }
   }
 }

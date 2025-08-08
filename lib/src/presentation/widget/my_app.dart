@@ -7,7 +7,7 @@ import 'package:source_byte_bot/src/presentation/widget/source_byte_bot.dart';
 
 ///[userId] and [botId] is the id which is needed to initialize the bot
 ///
-///[height] should be minimum [350]
+///[height] should be minimum [375]
 class SourceByteBot extends StatelessWidget {
   final String userId, botId;
   final double? width, height;
