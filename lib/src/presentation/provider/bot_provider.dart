@@ -1,12 +1,16 @@
 // Copyright (c) 2025, Indo-Sakura Software Pvt Ltd. All rights reserved.
 // Created By Suresh M, 07/08/2025
 
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:source_byte_bot/core/model/bot/request/init/init_request_model.dart';
 import 'package:source_byte_bot/core/model/bot/response/init/init_response_model.dart';
 import 'package:source_byte_bot/core/model/bot/state/bot_state.dart';
 import 'package:source_byte_bot/core/network/network_status.dart';
 import 'package:source_byte_bot/src/data/bot_remote_repo.dart';
+import 'package:source_byte_bot/theme/source_byte_theme.dart';
+import 'package:source_byte_bot/theme/theme_manager.dart';
+import 'package:source_byte_bot/util/enum/theme_mode_enum.dart';
 
 final botProvider = StateNotifierProvider<BotNotifierProvider, BotState>(
   (ref) => BotNotifierProvider(ref),
@@ -24,6 +28,10 @@ class BotNotifierProvider extends StateNotifier<BotState> {
   String? get initErrorMessage => state.initErrorMessage;
 
   InitResponseModel? get initResponseModel => state.initResponseModel;
+
+  ThemeModeEnum get themeMode => state.themeMode;
+
+  ThemeData get themeData => state.themeData ?? SourceByteTheme.others();
 
   Future<void> initBot({required String botId, required String userId}) async {
     state = state.copyWith(
@@ -50,6 +58,7 @@ class BotNotifierProvider extends StateNotifier<BotState> {
         initErrorMessage: null,
         initResponseModel: result.data,
       );
+      setThemeMode = initResponseModel?.bot?.industry;
     } else {
       state = state.copyWith(
         isInitLoading: false,
@@ -58,5 +67,31 @@ class BotNotifierProvider extends StateNotifier<BotState> {
         initResponseModel: null,
       );
     }
+  }
+
+  set setThemeMode(String? mode) {
+    if (mode == ThemeModeEnum.others.name) {
+      state = state.copyWith(themeMode: ThemeModeEnum.others);
+    } else if (mode == ThemeModeEnum.enterprise.name) {
+      state = state.copyWith(themeMode: ThemeModeEnum.enterprise);
+    } else if (mode == ThemeModeEnum.retail.name) {
+      state = state.copyWith(themeMode: ThemeModeEnum.retail);
+    } else if (mode == ThemeModeEnum.healthCare.name) {
+      state = state.copyWith(themeMode: ThemeModeEnum.healthCare);
+    } else if (mode == ThemeModeEnum.banking.name) {
+      state = state.copyWith(themeMode: ThemeModeEnum.banking);
+    } else if (mode == ThemeModeEnum.insurance.name) {
+      state = state.copyWith(themeMode: ThemeModeEnum.insurance);
+    } else if (mode == ThemeModeEnum.education.name) {
+      state = state.copyWith(themeMode: ThemeModeEnum.education);
+    }
+    state = state.copyWith(themeMode: ThemeModeEnum.others);
+
+    state = state.copyWith(
+      themeData: ThemeManager.them(
+        mode: themeMode,
+        primaryColor: initResponseModel?.botConfig?.actionColor,
+      ),
+    );
   }
 }

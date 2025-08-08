@@ -22,6 +22,8 @@ mixin _$BotState {
   String? get initErrorMessage => throw _privateConstructorUsedError;
   InitResponseModel? get initResponseModel =>
       throw _privateConstructorUsedError;
+  ThemeModeEnum get themeMode => throw _privateConstructorUsedError;
+  ThemeData? get themeData => throw _privateConstructorUsedError;
 
   /// Create a copy of BotState
   /// with the given fields replaced by the non-null parameter values.
@@ -40,6 +42,8 @@ abstract class $BotStateCopyWith<$Res> {
     bool isInitError,
     String? initErrorMessage,
     InitResponseModel? initResponseModel,
+    ThemeModeEnum themeMode,
+    ThemeData? themeData,
   });
 
   $InitResponseModelCopyWith<$Res>? get initResponseModel;
@@ -64,6 +68,8 @@ class _$BotStateCopyWithImpl<$Res, $Val extends BotState>
     Object? isInitError = null,
     Object? initErrorMessage = freezed,
     Object? initResponseModel = freezed,
+    Object? themeMode = null,
+    Object? themeData = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -83,6 +89,14 @@ class _$BotStateCopyWithImpl<$Res, $Val extends BotState>
                 ? _value.initResponseModel
                 : initResponseModel // ignore: cast_nullable_to_non_nullable
                       as InitResponseModel?,
+            themeMode: null == themeMode
+                ? _value.themeMode
+                : themeMode // ignore: cast_nullable_to_non_nullable
+                      as ThemeModeEnum,
+            themeData: freezed == themeData
+                ? _value.themeData
+                : themeData // ignore: cast_nullable_to_non_nullable
+                      as ThemeData?,
           )
           as $Val,
     );
@@ -117,6 +131,8 @@ abstract class _$$BotStateImplCopyWith<$Res>
     bool isInitError,
     String? initErrorMessage,
     InitResponseModel? initResponseModel,
+    ThemeModeEnum themeMode,
+    ThemeData? themeData,
   });
 
   @override
@@ -141,6 +157,8 @@ class __$$BotStateImplCopyWithImpl<$Res>
     Object? isInitError = null,
     Object? initErrorMessage = freezed,
     Object? initResponseModel = freezed,
+    Object? themeMode = null,
+    Object? themeData = freezed,
   }) {
     return _then(
       _$BotStateImpl(
@@ -160,6 +178,14 @@ class __$$BotStateImplCopyWithImpl<$Res>
             ? _value.initResponseModel
             : initResponseModel // ignore: cast_nullable_to_non_nullable
                   as InitResponseModel?,
+        themeMode: null == themeMode
+            ? _value.themeMode
+            : themeMode // ignore: cast_nullable_to_non_nullable
+                  as ThemeModeEnum,
+        themeData: freezed == themeData
+            ? _value.themeData
+            : themeData // ignore: cast_nullable_to_non_nullable
+                  as ThemeData?,
       ),
     );
   }
@@ -173,6 +199,8 @@ class _$BotStateImpl implements _BotState {
     this.isInitError = false,
     this.initErrorMessage,
     this.initResponseModel,
+    this.themeMode = ThemeModeEnum.others,
+    this.themeData,
   });
 
   @override
@@ -185,10 +213,15 @@ class _$BotStateImpl implements _BotState {
   final String? initErrorMessage;
   @override
   final InitResponseModel? initResponseModel;
+  @override
+  @JsonKey()
+  final ThemeModeEnum themeMode;
+  @override
+  final ThemeData? themeData;
 
   @override
   String toString() {
-    return 'BotState(isInitLoading: $isInitLoading, isInitError: $isInitError, initErrorMessage: $initErrorMessage, initResponseModel: $initResponseModel)';
+    return 'BotState(isInitLoading: $isInitLoading, isInitError: $isInitError, initErrorMessage: $initErrorMessage, initResponseModel: $initResponseModel, themeMode: $themeMode, themeData: $themeData)';
   }
 
   @override
@@ -203,7 +236,11 @@ class _$BotStateImpl implements _BotState {
             (identical(other.initErrorMessage, initErrorMessage) ||
                 other.initErrorMessage == initErrorMessage) &&
             (identical(other.initResponseModel, initResponseModel) ||
-                other.initResponseModel == initResponseModel));
+                other.initResponseModel == initResponseModel) &&
+            (identical(other.themeMode, themeMode) ||
+                other.themeMode == themeMode) &&
+            (identical(other.themeData, themeData) ||
+                other.themeData == themeData));
   }
 
   @override
@@ -213,6 +250,8 @@ class _$BotStateImpl implements _BotState {
     isInitError,
     initErrorMessage,
     initResponseModel,
+    themeMode,
+    themeData,
   );
 
   /// Create a copy of BotState
@@ -230,6 +269,8 @@ abstract class _BotState implements BotState {
     final bool isInitError,
     final String? initErrorMessage,
     final InitResponseModel? initResponseModel,
+    final ThemeModeEnum themeMode,
+    final ThemeData? themeData,
   }) = _$BotStateImpl;
 
   @override
@@ -240,6 +281,10 @@ abstract class _BotState implements BotState {
   String? get initErrorMessage;
   @override
   InitResponseModel? get initResponseModel;
+  @override
+  ThemeModeEnum get themeMode;
+  @override
+  ThemeData? get themeData;
 
   /// Create a copy of BotState
   /// with the given fields replaced by the non-null parameter values.

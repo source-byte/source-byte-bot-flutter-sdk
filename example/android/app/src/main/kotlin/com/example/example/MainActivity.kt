@@ -1,4 +1,4 @@
-package com.example.example
+package com.sourcebyte.ai
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -6,7 +6,9 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:source_byte_bot/src/presentation/provider/bot_provider.dart';
-import 'package:source_byte_bot/theme/source_byte_theme.dart';
+import 'package:source_byte_bot/src/presentation/widget/bot/health_care_bot.dart';
+import 'package:source_byte_bot/src/presentation/widget/bot/retail_bot.dart';
+import 'package:source_byte_bot/util/enum/theme_mode_enum.dart';
 
 ///[userId] and [botId] is the id which is needed to initialize the bot
 ///
@@ -20,11 +22,23 @@ class SourceByte extends ConsumerStatefulWidget {
 
 class _SourceByteState extends ConsumerState<SourceByte> {
   late BotNotifierProvider provider;
-  ThemeData themeData = SourceByteTheme.others;
 
   ///[init] Defining the bot with bot config
   Future<void> init() async {
     await provider.initBot(botId: widget.botId, userId: widget.userId);
+  }
+
+  Widget child(ThemeModeEnum mode) {
+    switch (mode) {
+      case ThemeModeEnum.retail:
+        return RetailBot();
+
+      case ThemeModeEnum.healthCare:
+        return HealthCareBot();
+
+      default:
+        return RetailBot();
+    }
   }
 
   @override
@@ -41,8 +55,8 @@ class _SourceByteState extends ConsumerState<SourceByte> {
     provider = ref.read(botProvider.notifier);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: themeData,
-      home: Scaffold(body: Column(children: [Text('data')])),
+      theme: provider.themeData,
+      home: Scaffold(body: child(provider.themeMode)),
     );
   }
 }
