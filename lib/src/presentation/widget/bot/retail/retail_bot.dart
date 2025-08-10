@@ -14,15 +14,22 @@ import 'package:source_byte_bot/util/extension/context_extension.dart';
 
 class RetailBot extends ConsumerStatefulWidget {
   final double? width, height;
-  final TextEditingController? emailController, passwordControlled;
-  final Function? sendOnTap;
+  final TextEditingController? emailController,
+      passwordControlled,
+      chatController;
+  final Function? loginOnTap;
+  final Function(String)? onSend;
+  final FocusNode? chatFocusNode;
   const RetailBot({
     super.key,
     this.width,
     this.height,
     this.emailController,
     this.passwordControlled,
-    this.sendOnTap,
+    this.loginOnTap,
+    this.chatController,
+    this.chatFocusNode,
+    this.onSend,
   });
 
   @override
@@ -43,18 +50,25 @@ class _RetailBotState extends ConsumerState<RetailBot> {
     }
     return Column(
       children: [
-        if (provider.authType == AuthTypeEnum.open)
+        if (provider.authType != AuthTypeEnum.open && !provider.showChat)
           RetailBotIntro(width: width, height: height)
-        else if (provider.authType == AuthTypeEnum.closed)
+        else if (provider.authType != AuthTypeEnum.closed && !provider.showChat)
           RetailBotLogin(
             width: width,
             height: height,
             emailController: widget.emailController,
             passwordControlled: widget.passwordControlled,
-            sendOnTap: widget.sendOnTap,
+            sendOnTap: widget.loginOnTap,
+            errorMessage: provider.loginErrorMessage,
           )
         else if (provider.showChat)
-          RetailBotChat(width: width, height: height),
+          RetailBotChat(
+            width: width,
+            height: height,
+            chatController: widget.chatController,
+            chatFocusNode: widget.chatFocusNode,
+            onSend: widget.onSend,
+          ),
       ],
     );
   }

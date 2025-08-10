@@ -85,7 +85,51 @@ abstract class NetworkClient {
 
       return response;
     } else {
-      return null;
+      return response;
     }
+  }
+
+  static Future<http.ByteStream> postStream({
+    required String endPoint,
+    dynamic body,
+    bool showError = true,
+    bool isAuth = false,
+  }) async {
+    final request = http.Request('POST', Uri.parse('$baseUrl$endPoint'));
+
+    if (isAuth) {
+      request.headers.addAll({
+        'Content-Type': 'application/json',
+        'Authorization': "Token ${AuthManager().token}",
+      });
+    } else {
+      request.headers.addAll({'Content-Type': 'application/json'});
+    }
+
+    request.body = jsonEncode({
+      "bot_id": "3da12706-ef9b-49a2-af0d-007b67150b82",
+      "session_id": "6bbd9e2e-f40e-472f-9e26-4dfb6c5fdff2",
+      "message": "what is your name",
+      "userId": "yamun@gmail.com",
+    });
+
+    final response = await request.send();
+    return response.stream;
+
+    // if (response.statusCode == NetworkStatus.status200.statusCode) {
+    //   // var result = await response.stream.bytesToString();
+    //   // TODO: remove before prod
+    //   // log(
+    //   //   "Request:  $baseUrl$endPoint ${json.encode(body)} \n\nResponse: $result\n\ntoken:  ${AuthManager().token}",
+    //   // );
+    //   return response.stream;
+    //   // return http.Response(result, NetworkStatus.status200.statusCode);
+    // } else {
+    //   // return http.Response(
+    //   //   json.encode({'message': "something went wrong"}),
+    //   //   NetworkStatus.status200.statusCode,
+    //   // );
+    //   return http.ByteStream();
+    // }
   }
 }

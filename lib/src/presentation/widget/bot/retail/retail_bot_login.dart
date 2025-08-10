@@ -15,6 +15,7 @@ class RetailBotLogin extends ConsumerStatefulWidget {
   final double height;
   final TextEditingController? emailController, passwordControlled;
   final Function? sendOnTap;
+  final String? errorMessage;
   const RetailBotLogin({
     super.key,
     required this.width,
@@ -22,6 +23,7 @@ class RetailBotLogin extends ConsumerStatefulWidget {
     this.emailController,
     this.passwordControlled,
     this.sendOnTap,
+    this.errorMessage,
   });
   @override
   ConsumerState<RetailBotLogin> createState() => _RetailBotLoginState();
@@ -70,6 +72,16 @@ class _RetailBotLoginState extends ConsumerState<RetailBotLogin> {
                     controller: widget.passwordControlled,
                     hintStyle: TextStyle(color: AppColors.greyC5),
                   ),
+                  BrandVSpace.gap16(),
+                  if (widget.errorMessage != null)
+                    Text(
+                      widget.errorMessage!,
+                      style: TextStyle(
+                        color: AppColors.red55.withAlpha(200),
+                        fontSize: 16,
+                        fontFamily: "Gilroy",
+                      ),
+                    ),
                   BrandVSpace.gap16(),
                   InkWell(
                     onTap: () {

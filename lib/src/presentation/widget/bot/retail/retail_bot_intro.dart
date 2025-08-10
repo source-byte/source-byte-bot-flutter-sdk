@@ -57,7 +57,7 @@ class _RetailBotIntroState extends ConsumerState<RetailBotIntro> {
                             placeholder: (context, url) => SizedBox(),
                             width: 35,
                             height: 35,
-                            fit: BoxFit.cover,
+                            fit: BoxFit.cover,      
                           ),
                           BrandVSpace.gap10(),
                         ],

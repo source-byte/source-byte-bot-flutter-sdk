@@ -17,5 +17,9 @@ class BotState with _$BotState {
     @Default(ThemeModeEnum.others) ThemeModeEnum themeMode,
     ThemeData? themeData,
     @Default(false) bool showChat,
+    @Default(false) bool isLoginLoading,
+    @Default(false) bool isLoginError,
+    String? loginErrorMessage,
+    @Default(false) bool isSendMessageLoading,
   }) = _BotState;
 }

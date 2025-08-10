@@ -33,7 +33,26 @@ class _SourceByteState extends ConsumerState<SourceByte> {
 
   TextEditingController passwordControlled = TextEditingController();
 
-  Future<void> loginOnTap() async {}
+  TextEditingController chatControlled = TextEditingController();
+
+  FocusNode chatFocusNode = FocusNode();
+
+  Future<void> loginOnTap() async {
+    bool isLoggedin = await provider.loginBot(
+      email: emailController.text,
+      password: passwordControlled.text,
+    );
+    if (isLoggedin) {
+      provider.setShowChat = true;
+    } else {
+      provider.setShowChat = false;
+    }
+  }
+
+  Future<void> onChatSend(String value) async {
+    if (value.isEmpty) return;
+    provider.sendMessage(message: value);
+  }
 
   ///[init] Defining the bot with bot config
   Future<void> init() async {
@@ -48,7 +67,7 @@ class _SourceByteState extends ConsumerState<SourceByte> {
           height: widget.height,
           emailController: emailController,
           passwordControlled: passwordControlled,
-          sendOnTap: loginOnTap,
+          loginOnTap: loginOnTap,
         );
 
       case ThemeModeEnum.healthCare:
@@ -60,7 +79,10 @@ class _SourceByteState extends ConsumerState<SourceByte> {
           height: widget.height,
           emailController: emailController,
           passwordControlled: passwordControlled,
-          sendOnTap: loginOnTap,
+          loginOnTap: loginOnTap,
+          chatController: chatControlled,
+          chatFocusNode: chatFocusNode,
+          onSend: onChatSend,
         );
 
       default:
@@ -69,7 +91,7 @@ class _SourceByteState extends ConsumerState<SourceByte> {
           height: widget.height,
           emailController: emailController,
           passwordControlled: passwordControlled,
-          sendOnTap: loginOnTap,
+          loginOnTap: loginOnTap,
         );
     }
   }

@@ -4,9 +4,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:source_byte_bot/core/model/bot/request/init/init_request_model.dart';
+import 'package:source_byte_bot/core/model/bot/request/send_message/send_message_request_model.dart';
 import 'package:source_byte_bot/core/model/bot/response/init/init_response_model.dart';
 import 'package:source_byte_bot/core/model/bot/state/bot_state.dart';
 import 'package:source_byte_bot/core/network/network_status.dart';
+import 'package:source_byte_bot/core/network/web_scoket/web_socket_manager.dart';
 import 'package:source_byte_bot/src/data/bot_remote_repo.dart';
 import 'package:source_byte_bot/theme/colors.dart';
 import 'package:source_byte_bot/theme/source_byte_theme.dart';
@@ -68,12 +70,21 @@ class BotNotifierProvider extends StateNotifier<BotState> {
 
   String? get avatarLogo => initResponseModel?.avatar?.image;
 
+  bool get isLoginLoading => state.isLoginLoading;
+
+  bool get isLoginError => state.isLoginError;
+
+  String? get loginErrorMessage => state.loginErrorMessage;
+
+  bool get isSendMessageLoading => state.isSendMessageLoading;
+
   Future<void> initBot({required String botId, required String userId}) async {
     state = state.copyWith(
       isInitLoading: true,
       initErrorMessage: null,
       initResponseModel: null,
       isInitError: false,
+      showChat: false,
     );
 
     var requestModel = InitRequestModel(
@@ -104,6 +115,53 @@ class BotNotifierProvider extends StateNotifier<BotState> {
     }
   }
 
+  Future<bool> loginBot({
+    required String email,
+    required String password,
+  }) async {
+    state = state.copyWith(
+      loginErrorMessage: null,
+      isLoginError: false,
+      isLoginLoading: true,
+    );
+
+    var result = await ref
+        .read(botRemoteRepo)
+        .login(email: email, password: password);
+
+    if (result.success == ActionStatus.success.code) {
+      state = state.copyWith(
+        loginErrorMessage: null,
+        isLoginError: false,
+        isLoginLoading: false,
+      );
+      return true;
+    } else {
+      state = state.copyWith(
+        loginErrorMessage: result.message,
+        isLoginError: true,
+        isLoginLoading: false,
+      );
+      return false;
+    }
+  }
+
+  Future<void> sendMessage({required String message}) async {
+    state = state.copyWith(isSendMessageLoading: true);
+
+    var requestModel = SendMessageRequestModel(
+      botId: initResponseModel?.bot?.id,
+      message: message,
+      sessionId: initResponseModel?.sessionId,
+      userId: initResponseModel?.user,
+    );
+    var result = await WebSocketManager.sendMessage(requestModel: requestModel);
+
+    // if (result.success == ActionStatus.success.code) {
+    //   print(result.data);
+    // }
+  }
+
   set setThemeMode(String? mode) {
     if (mode == ThemeModeEnum.others.name) {
       state = state.copyWith(themeMode: ThemeModeEnum.others);
@@ -128,5 +186,9 @@ class BotNotifierProvider extends StateNotifier<BotState> {
         primaryColor: initResponseModel?.botConfig?.actionColor,
       ),
     );
+  }
+
+  set setShowChat(bool value) {
+    state = state.copyWith(showChat: value);
   }
 }

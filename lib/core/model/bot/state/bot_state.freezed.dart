@@ -25,6 +25,10 @@ mixin _$BotState {
   ThemeModeEnum get themeMode => throw _privateConstructorUsedError;
   ThemeData? get themeData => throw _privateConstructorUsedError;
   bool get showChat => throw _privateConstructorUsedError;
+  bool get isLoginLoading => throw _privateConstructorUsedError;
+  bool get isLoginError => throw _privateConstructorUsedError;
+  String? get loginErrorMessage => throw _privateConstructorUsedError;
+  bool get isSendMessageLoading => throw _privateConstructorUsedError;
 
   /// Create a copy of BotState
   /// with the given fields replaced by the non-null parameter values.
@@ -46,6 +50,10 @@ abstract class $BotStateCopyWith<$Res> {
     ThemeModeEnum themeMode,
     ThemeData? themeData,
     bool showChat,
+    bool isLoginLoading,
+    bool isLoginError,
+    String? loginErrorMessage,
+    bool isSendMessageLoading,
   });
 
   $InitResponseModelCopyWith<$Res>? get initResponseModel;
@@ -73,6 +81,10 @@ class _$BotStateCopyWithImpl<$Res, $Val extends BotState>
     Object? themeMode = null,
     Object? themeData = freezed,
     Object? showChat = null,
+    Object? isLoginLoading = null,
+    Object? isLoginError = null,
+    Object? loginErrorMessage = freezed,
+    Object? isSendMessageLoading = null,
   }) {
     return _then(
       _value.copyWith(
@@ -103,6 +115,22 @@ class _$BotStateCopyWithImpl<$Res, $Val extends BotState>
             showChat: null == showChat
                 ? _value.showChat
                 : showChat // ignore: cast_nullable_to_non_nullable
+                      as bool,
+            isLoginLoading: null == isLoginLoading
+                ? _value.isLoginLoading
+                : isLoginLoading // ignore: cast_nullable_to_non_nullable
+                      as bool,
+            isLoginError: null == isLoginError
+                ? _value.isLoginError
+                : isLoginError // ignore: cast_nullable_to_non_nullable
+                      as bool,
+            loginErrorMessage: freezed == loginErrorMessage
+                ? _value.loginErrorMessage
+                : loginErrorMessage // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            isSendMessageLoading: null == isSendMessageLoading
+                ? _value.isSendMessageLoading
+                : isSendMessageLoading // ignore: cast_nullable_to_non_nullable
                       as bool,
           )
           as $Val,
@@ -141,6 +169,10 @@ abstract class _$$BotStateImplCopyWith<$Res>
     ThemeModeEnum themeMode,
     ThemeData? themeData,
     bool showChat,
+    bool isLoginLoading,
+    bool isLoginError,
+    String? loginErrorMessage,
+    bool isSendMessageLoading,
   });
 
   @override
@@ -168,6 +200,10 @@ class __$$BotStateImplCopyWithImpl<$Res>
     Object? themeMode = null,
     Object? themeData = freezed,
     Object? showChat = null,
+    Object? isLoginLoading = null,
+    Object? isLoginError = null,
+    Object? loginErrorMessage = freezed,
+    Object? isSendMessageLoading = null,
   }) {
     return _then(
       _$BotStateImpl(
@@ -199,6 +235,22 @@ class __$$BotStateImplCopyWithImpl<$Res>
             ? _value.showChat
             : showChat // ignore: cast_nullable_to_non_nullable
                   as bool,
+        isLoginLoading: null == isLoginLoading
+            ? _value.isLoginLoading
+            : isLoginLoading // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        isLoginError: null == isLoginError
+            ? _value.isLoginError
+            : isLoginError // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        loginErrorMessage: freezed == loginErrorMessage
+            ? _value.loginErrorMessage
+            : loginErrorMessage // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        isSendMessageLoading: null == isSendMessageLoading
+            ? _value.isSendMessageLoading
+            : isSendMessageLoading // ignore: cast_nullable_to_non_nullable
+                  as bool,
       ),
     );
   }
@@ -215,6 +267,10 @@ class _$BotStateImpl implements _BotState {
     this.themeMode = ThemeModeEnum.others,
     this.themeData,
     this.showChat = false,
+    this.isLoginLoading = false,
+    this.isLoginError = false,
+    this.loginErrorMessage,
+    this.isSendMessageLoading = false,
   });
 
   @override
@@ -235,10 +291,21 @@ class _$BotStateImpl implements _BotState {
   @override
   @JsonKey()
   final bool showChat;
+  @override
+  @JsonKey()
+  final bool isLoginLoading;
+  @override
+  @JsonKey()
+  final bool isLoginError;
+  @override
+  final String? loginErrorMessage;
+  @override
+  @JsonKey()
+  final bool isSendMessageLoading;
 
   @override
   String toString() {
-    return 'BotState(isInitLoading: $isInitLoading, isInitError: $isInitError, initErrorMessage: $initErrorMessage, initResponseModel: $initResponseModel, themeMode: $themeMode, themeData: $themeData, showChat: $showChat)';
+    return 'BotState(isInitLoading: $isInitLoading, isInitError: $isInitError, initErrorMessage: $initErrorMessage, initResponseModel: $initResponseModel, themeMode: $themeMode, themeData: $themeData, showChat: $showChat, isLoginLoading: $isLoginLoading, isLoginError: $isLoginError, loginErrorMessage: $loginErrorMessage, isSendMessageLoading: $isSendMessageLoading)';
   }
 
   @override
@@ -259,7 +326,15 @@ class _$BotStateImpl implements _BotState {
             (identical(other.themeData, themeData) ||
                 other.themeData == themeData) &&
             (identical(other.showChat, showChat) ||
-                other.showChat == showChat));
+                other.showChat == showChat) &&
+            (identical(other.isLoginLoading, isLoginLoading) ||
+                other.isLoginLoading == isLoginLoading) &&
+            (identical(other.isLoginError, isLoginError) ||
+                other.isLoginError == isLoginError) &&
+            (identical(other.loginErrorMessage, loginErrorMessage) ||
+                other.loginErrorMessage == loginErrorMessage) &&
+            (identical(other.isSendMessageLoading, isSendMessageLoading) ||
+                other.isSendMessageLoading == isSendMessageLoading));
   }
 
   @override
@@ -272,6 +347,10 @@ class _$BotStateImpl implements _BotState {
     themeMode,
     themeData,
     showChat,
+    isLoginLoading,
+    isLoginError,
+    loginErrorMessage,
+    isSendMessageLoading,
   );
 
   /// Create a copy of BotState
@@ -292,6 +371,10 @@ abstract class _BotState implements BotState {
     final ThemeModeEnum themeMode,
     final ThemeData? themeData,
     final bool showChat,
+    final bool isLoginLoading,
+    final bool isLoginError,
+    final String? loginErrorMessage,
+    final bool isSendMessageLoading,
   }) = _$BotStateImpl;
 
   @override
@@ -308,6 +391,14 @@ abstract class _BotState implements BotState {
   ThemeData? get themeData;
   @override
   bool get showChat;
+  @override
+  bool get isLoginLoading;
+  @override
+  bool get isLoginError;
+  @override
+  String? get loginErrorMessage;
+  @override
+  bool get isSendMessageLoading;
 
   /// Create a copy of BotState
   /// with the given fields replaced by the non-null parameter values.

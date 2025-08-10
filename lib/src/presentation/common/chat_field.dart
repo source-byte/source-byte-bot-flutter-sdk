@@ -8,7 +8,7 @@ import 'package:source_byte_bot/theme/colors.dart';
 
 class ChatField extends StatelessWidget {
   final Function? micOnTap;
-  final Function(String? messages)? onSend;
+  final Function(String messages)? onSend;
   final TextEditingController? chatController;
   final FocusNode? chatFocusNode;
   const ChatField({
@@ -42,7 +42,7 @@ class ChatField extends StatelessWidget {
         BrandHSpace.gap10(),
         InkWell(
           onTap: () {
-            onSend?.call(chatController?.text);
+            onSend?.call(chatController?.text ?? '');
           },
           child: Container(
             decoration: BoxDecoration(
