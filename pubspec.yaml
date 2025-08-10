@@ -1,7 +1,8 @@
 name: source_byte_bot
-description: "A new Flutter package project."
+description: "A indo sakura chat bot package from source byte "
 version: 0.0.1
-homepage:
+homepage: https://github.com/source-byte/source-byte-bot-flutter-sdk
+repository: https://github.com/source-byte/source-byte-bot-flutter-sdk
 
 environment:
   sdk: ^3.8.1
