@@ -1,8 +1,6 @@
 // Copyright (c) 2025, Indo-Sakura Software Pvt Ltd. All rights reserved.
 // Created By Suresh M, 08/08/2025
 
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
@@ -24,6 +22,7 @@ class RetailBotChat extends ConsumerStatefulWidget {
   final TextEditingController? chatController;
   final Function(String)? onSend;
   final FocusNode? chatFocusNode;
+  final ScrollController? scrollController;
   const RetailBotChat({
     super.key,
     required this.width,
@@ -31,6 +30,7 @@ class RetailBotChat extends ConsumerStatefulWidget {
     this.chatController,
     this.onSend,
     this.chatFocusNode,
+    this.scrollController,
   });
 
   @override
@@ -40,46 +40,10 @@ class RetailBotChat extends ConsumerStatefulWidget {
 class _RetailBotChatState extends ConsumerState<RetailBotChat> {
   late BotNotifierProvider provider;
 
-  ScrollController scrollController = ScrollController();
-
-  StreamSubscription? _chatSubscription;
-
-  Future<void> fetchData() async {
-    Future.delayed(const Duration(milliseconds: 200), () {
-      scrollController.animateTo(
-        scrollController.position.maxScrollExtent + 100,
-        duration: const Duration(milliseconds: 100),
-        curve: Curves.easeInSine,
-      );
-    });
-  }
-
-  Future<void> listenChat() async {
-    _chatSubscription = WebSocketManager.chatStream.listen((data) {
-      ChatManager().addChat(chat: data);
-      Future.delayed(const Duration(milliseconds: 200), () {
-        scrollController.animateTo(
-          scrollController.position.maxScrollExtent + 100,
-          duration: const Duration(milliseconds: 100),
-          curve: Curves.fastLinearToSlowEaseIn,
-        );
-      });
-    });
-  }
-
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      fetchData();
-      listenChat();
-    });
-  }
-
-  @override
-  void dispose() {
-    _chatSubscription?.cancel();
-    super.dispose();
+    WidgetsBinding.instance.addPostFrameCallback((_) {});
   }
 
   @override
@@ -106,7 +70,7 @@ class _RetailBotChatState extends ConsumerState<RetailBotChat> {
                       stream: WebSocketManager.chatStream,
                       builder: (context, asyncSnapshot) {
                         return ListView.separated(
-                          controller: scrollController,
+                          controller: widget.scrollController,
                           shrinkWrap: true,
                           padding: EdgeInsets.zero,
                           itemCount: ChatManager().chat.length,

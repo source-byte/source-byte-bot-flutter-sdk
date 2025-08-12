@@ -20,6 +20,7 @@ class RetailBot extends ConsumerStatefulWidget {
   final Function? loginOnTap;
   final Function(String)? onSend;
   final FocusNode? chatFocusNode;
+  final ScrollController? scrollController;
   const RetailBot({
     super.key,
     this.width,
@@ -30,6 +31,7 @@ class RetailBot extends ConsumerStatefulWidget {
     this.chatController,
     this.chatFocusNode,
     this.onSend,
+    this.scrollController,
   });
 
   @override
@@ -68,6 +70,7 @@ class _RetailBotState extends ConsumerState<RetailBot> {
             chatController: widget.chatController,
             chatFocusNode: widget.chatFocusNode,
             onSend: widget.onSend,
+            scrollController: widget.scrollController,
           ),
       ],
     );

@@ -15,6 +15,12 @@ class ExampleScreen extends StatefulWidget {
 class _ExampleScreenState extends State<ExampleScreen> {
   @override
   Widget build(BuildContext context) {
-    return SourceByteBot(userId: userId, botId: botId);
+    return SourceByteBot(
+      userId: userId,
+      botId: botId,
+      onBotMessage: (p0) {},
+      onLogin: (email, password) {},
+      sendMessageOnTap: (p0) {},
+    );
   }
 }
