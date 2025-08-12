@@ -2,50 +2,59 @@
 // Created By Suresh M, 10/08/2025
 
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:source_byte_bot/core/model/bot/request/send_message/send_message_request_model.dart';
+import 'package:source_byte_bot/core/model/bot/response/chat/chat_response_model.dart';
 import 'package:source_byte_bot/core/network/endpoint/bot_endpoint.dart';
 import 'package:source_byte_bot/core/network/network.dart';
 
 abstract class WebSocketManager {
-  static final StreamController<String> _chatController =
+  static final StreamController<ChatResponseModel> _chatController =
       StreamController.broadcast();
 
-  static Stream<String> get chatStream => _chatController.stream;
+  static Stream<ChatResponseModel> get chatStream => _chatController.stream;
 
   static Future<void> sendMessage({
     required SendMessageRequestModel requestModel,
+    required bool isAuth,
   }) async {
+    _chatController.add(
+      ChatResponseModel(
+        from: Participant(role: 'user'),
+        message: requestModel.message,
+        timestamp: DateTime.now(),
+      ),
+    );
     try {
       var response = await NetworkClient.postStream(
         endPoint: BotEndpoint.sendMessage,
         body: requestModel.toJson(),
+        isAuth: isAuth,
       );
 
       response.toStringStream().listen((onData) {
-        _chatController.add(onData);
+        try {
+          var k = onData.split('''data: {"full_response": ''');
+          var j = k.last.split('''data: {"result_data": ''');
+          var index = j.first.lastIndexOf('}');
+          var o = j.first.substring(0, index);
+          var res = '''{"full_response": $o}''';
+          Map<String, dynamic> map = jsonDecode(res);
+          _chatController.add(
+            ChatResponseModel(
+              from: Participant(id: map["bot_id"], role: 'bot'),
+              message: map["full_response"],
+              timestamp: DateTime.now(),
+              to: Participant(id: 'user'),
+            ),
+          );
+        } catch (e) {
+          //
+        }
       });
-
-      // if (response?.statusCode == NetworkStatus.status200.statusCode) {
-      //   body = json.decode(response!.body);
-      //   var result = BaseDynamicResponse<String?>.fromJson(
-      //     body,
-
-      //     (json) => json as String?,
-      //   );
-      //   return result;
-      // } else {
-      //   body = json.decode(response?.body ?? '');
-
-      //   return BaseDynamicResponse(
-      //     message: body['message'],
-      //     statusCode: response?.statusCode,
-      //     success: false,
-      //   );
-      // }
     } catch (e) {
-      // return BaseDynamicResponse.error();
+      //
     }
-    // return null;
   }
 }

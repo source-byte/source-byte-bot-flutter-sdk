@@ -11,12 +11,14 @@ class ChatField extends StatelessWidget {
   final Function(String messages)? onSend;
   final TextEditingController? chatController;
   final FocusNode? chatFocusNode;
+  final bool isSendButtonDisabled;
   const ChatField({
     super.key,
     this.micOnTap,
     this.onSend,
     this.chatController,
     this.chatFocusNode,
+    this.isSendButtonDisabled = false,
   });
 
   @override
@@ -42,7 +44,9 @@ class ChatField extends StatelessWidget {
         BrandHSpace.gap10(),
         InkWell(
           onTap: () {
-            onSend?.call(chatController?.text ?? '');
+            if (!isSendButtonDisabled) {
+              onSend?.call(chatController?.text ?? '');
+            }
           },
           child: Container(
             decoration: BoxDecoration(
@@ -56,7 +60,9 @@ class ChatField extends StatelessWidget {
                 padding: const EdgeInsets.all(14),
                 child: Icon(
                   Icons.send,
-                  color: Theme.of(context).primaryColor,
+                  color: isSendButtonDisabled
+                      ? Theme.of(context).primaryColor.withAlpha(100)
+                      : Theme.of(context).primaryColor,
                   size: 28,
                 ),
               ),

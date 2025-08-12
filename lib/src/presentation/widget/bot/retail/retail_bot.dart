@@ -52,7 +52,7 @@ class _RetailBotState extends ConsumerState<RetailBot> {
       children: [
         if (provider.authType != AuthTypeEnum.open && !provider.showChat)
           RetailBotIntro(width: width, height: height)
-        else if (provider.authType != AuthTypeEnum.closed && !provider.showChat)
+        else if (provider.authType != AuthTypeEnum.closed && provider.showChat)
           RetailBotLogin(
             width: width,
             height: height,
@@ -61,7 +61,7 @@ class _RetailBotState extends ConsumerState<RetailBot> {
             sendOnTap: widget.loginOnTap,
             errorMessage: provider.loginErrorMessage,
           )
-        else if (provider.showChat)
+        else if (!provider.showChat)
           RetailBotChat(
             width: width,
             height: height,

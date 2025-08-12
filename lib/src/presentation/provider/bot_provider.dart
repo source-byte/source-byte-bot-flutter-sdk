@@ -155,11 +155,13 @@ class BotNotifierProvider extends StateNotifier<BotState> {
       sessionId: initResponseModel?.sessionId,
       userId: initResponseModel?.user,
     );
-    var result = await WebSocketManager.sendMessage(requestModel: requestModel);
 
-    // if (result.success == ActionStatus.success.code) {
-    //   print(result.data);
-    // }
+    await WebSocketManager.sendMessage(
+      requestModel: requestModel,
+      isAuth: authType == AuthTypeEnum.closed,
+    ).then((onValue) {
+      state = state.copyWith(isSendMessageLoading: false);
+    });
   }
 
   set setThemeMode(String? mode) {

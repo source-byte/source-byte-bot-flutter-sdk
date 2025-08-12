@@ -70,7 +70,10 @@ class ChatTile extends StatelessWidget {
                         ProfileAvatar(imgUrl: imgUrl, width: 24, height: 24),
                         Text(
                           timeStamp ?? '',
-                          style: TextStyle(color: AppColors.grey9D),
+                          style: TextStyle(
+                            color: AppColors.grey9D,
+                            fontSize: 12,
+                          ),
                         ),
                       ],
                     ),
@@ -128,7 +131,10 @@ class ChatTile extends StatelessWidget {
                       children: [
                         Text(
                           timeStamp ?? '',
-                          style: TextStyle(color: AppColors.grey9D),
+                          style: TextStyle(
+                            color: AppColors.grey9D,
+                            fontSize: 12,
+                          ),
                         ),
                         ProfileAvatar(imgUrl: imgUrl, width: 24, height: 24),
                       ],

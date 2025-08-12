@@ -50,7 +50,11 @@ class _SourceByteState extends ConsumerState<SourceByte> {
   }
 
   Future<void> onChatSend(String value) async {
-    if (value.isEmpty) return;
+    if (value.isEmpty) {
+      chatFocusNode.requestFocus();
+      return;
+    }
+    chatControlled.clear();
     provider.sendMessage(message: value);
   }
 
