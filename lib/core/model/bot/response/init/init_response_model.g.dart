@@ -89,7 +89,7 @@ _$BotConfigImpl _$$BotConfigImplFromJson(Map<String, dynamic> json) =>
     _$BotConfigImpl(
       id: json['id'] as String?,
       bot: json['bot'] as String?,
-      logo: json['logo'],
+      logo: json['logo'] as String?,
       backgroundColor: json['background_color'] as String?,
       actionColor: json['action_color'] as String?,
       textColor: json['text_color'] as String?,

@@ -1048,7 +1048,7 @@ mixin _$BotConfig {
   @JsonKey(name: "bot")
   String? get bot => throw _privateConstructorUsedError;
   @JsonKey(name: "logo")
-  dynamic get logo => throw _privateConstructorUsedError;
+  String? get logo => throw _privateConstructorUsedError;
   @JsonKey(name: "background_color")
   String? get backgroundColor => throw _privateConstructorUsedError;
   @JsonKey(name: "action_color")
@@ -1108,7 +1108,7 @@ abstract class $BotConfigCopyWith<$Res> {
   $Res call({
     @JsonKey(name: "id") String? id,
     @JsonKey(name: "bot") String? bot,
-    @JsonKey(name: "logo") dynamic logo,
+    @JsonKey(name: "logo") String? logo,
     @JsonKey(name: "background_color") String? backgroundColor,
     @JsonKey(name: "action_color") String? actionColor,
     @JsonKey(name: "text_color") String? textColor,
@@ -1184,7 +1184,7 @@ class _$BotConfigCopyWithImpl<$Res, $Val extends BotConfig>
             logo: freezed == logo
                 ? _value.logo
                 : logo // ignore: cast_nullable_to_non_nullable
-                      as dynamic,
+                      as String?,
             backgroundColor: freezed == backgroundColor
                 ? _value.backgroundColor
                 : backgroundColor // ignore: cast_nullable_to_non_nullable
@@ -1283,7 +1283,7 @@ abstract class _$$BotConfigImplCopyWith<$Res>
   $Res call({
     @JsonKey(name: "id") String? id,
     @JsonKey(name: "bot") String? bot,
-    @JsonKey(name: "logo") dynamic logo,
+    @JsonKey(name: "logo") String? logo,
     @JsonKey(name: "background_color") String? backgroundColor,
     @JsonKey(name: "action_color") String? actionColor,
     @JsonKey(name: "text_color") String? textColor,
@@ -1358,7 +1358,7 @@ class __$$BotConfigImplCopyWithImpl<$Res>
         logo: freezed == logo
             ? _value.logo
             : logo // ignore: cast_nullable_to_non_nullable
-                  as dynamic,
+                  as String?,
         backgroundColor: freezed == backgroundColor
             ? _value.backgroundColor
             : backgroundColor // ignore: cast_nullable_to_non_nullable
@@ -1484,7 +1484,7 @@ class _$BotConfigImpl implements _BotConfig {
   final String? bot;
   @override
   @JsonKey(name: "logo")
-  final dynamic logo;
+  final String? logo;
   @override
   @JsonKey(name: "background_color")
   final String? backgroundColor;
@@ -1566,7 +1566,7 @@ class _$BotConfigImpl implements _BotConfig {
             other is _$BotConfigImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.bot, bot) || other.bot == bot) &&
-            const DeepCollectionEquality().equals(other.logo, logo) &&
+            (identical(other.logo, logo) || other.logo == logo) &&
             (identical(other.backgroundColor, backgroundColor) ||
                 other.backgroundColor == backgroundColor) &&
             (identical(other.actionColor, actionColor) ||
@@ -1619,7 +1619,7 @@ class _$BotConfigImpl implements _BotConfig {
     runtimeType,
     id,
     bot,
-    const DeepCollectionEquality().hash(logo),
+    logo,
     backgroundColor,
     actionColor,
     textColor,
@@ -1660,7 +1660,7 @@ abstract class _BotConfig implements BotConfig {
   const factory _BotConfig({
     @JsonKey(name: "id") final String? id,
     @JsonKey(name: "bot") final String? bot,
-    @JsonKey(name: "logo") final dynamic logo,
+    @JsonKey(name: "logo") final String? logo,
     @JsonKey(name: "background_color") final String? backgroundColor,
     @JsonKey(name: "action_color") final String? actionColor,
     @JsonKey(name: "text_color") final String? textColor,
@@ -1696,7 +1696,7 @@ abstract class _BotConfig implements BotConfig {
   String? get bot;
   @override
   @JsonKey(name: "logo")
-  dynamic get logo;
+  String? get logo;
   @override
   @JsonKey(name: "background_color")
   String? get backgroundColor;

@@ -3,4 +3,6 @@
 
 abstract class BotEndpoint {
   static const init = '/bot_builder/init-bot-sdk/';
+  static const login = '/auth/login/';
+  static const sendMessage = '/bot_builder/bot-chat/';
 }

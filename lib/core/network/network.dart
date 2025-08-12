@@ -85,7 +85,30 @@ abstract class NetworkClient {
 
       return response;
     } else {
-      return null;
+      return response;
     }
+  }
+
+  static Future<http.ByteStream> postStream({
+    required String endPoint,
+    dynamic body,
+    bool showError = true,
+    bool isAuth = false,
+  }) async {
+    final request = http.Request('POST', Uri.parse('$baseUrl$endPoint'));
+
+    if (isAuth) {
+      request.headers.addAll({
+        'Content-Type': 'application/json',
+        'Authorization': "Token ${AuthManager().token}",
+      });
+    } else {
+      request.headers.addAll({'Content-Type': 'application/json'});
+    }
+
+    request.body = jsonEncode(body);
+
+    final response = await request.send();
+    return response.stream;
   }
 }
