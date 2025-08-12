@@ -21,6 +21,7 @@ class RetailBot extends ConsumerStatefulWidget {
   final Function(String)? onSend;
   final FocusNode? chatFocusNode;
   final ScrollController? scrollController;
+  final bool showWelcomeScreen;
   const RetailBot({
     super.key,
     this.width,
@@ -32,6 +33,7 @@ class RetailBot extends ConsumerStatefulWidget {
     this.chatFocusNode,
     this.onSend,
     this.scrollController,
+    this.showWelcomeScreen = true,
   });
 
   @override
@@ -52,9 +54,9 @@ class _RetailBotState extends ConsumerState<RetailBot> {
     }
     return Column(
       children: [
-        if (provider.authType != AuthTypeEnum.open && !provider.showChat)
+        if (widget.showWelcomeScreen)
           RetailBotIntro(width: width, height: height)
-        else if (provider.authType != AuthTypeEnum.closed && provider.showChat)
+        else if (provider.authType == AuthTypeEnum.closed && !provider.showChat)
           RetailBotLogin(
             width: width,
             height: height,
@@ -63,7 +65,7 @@ class _RetailBotState extends ConsumerState<RetailBot> {
             sendOnTap: widget.loginOnTap,
             errorMessage: provider.loginErrorMessage,
           )
-        else if (!provider.showChat)
+        else if (provider.showChat)
           RetailBotChat(
             width: width,
             height: height,

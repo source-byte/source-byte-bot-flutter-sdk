@@ -12,10 +12,18 @@ import 'package:source_byte_bot/src/presentation/provider/bot_provider.dart';
 import 'package:source_byte_bot/theme/colors.dart';
 
 class RetailBotIntro extends ConsumerStatefulWidget {
-  const RetailBotIntro({super.key, required this.width, required this.height});
+  const RetailBotIntro({
+    super.key,
+    required this.width,
+    required this.height,
+    this.chatOnTap,
+  });
 
   final double width;
+
   final double height;
+
+  final Function? chatOnTap;
 
   @override
   ConsumerState<RetailBotIntro> createState() => _RetailBotIntroState();
@@ -57,7 +65,7 @@ class _RetailBotIntroState extends ConsumerState<RetailBotIntro> {
                             placeholder: (context, url) => SizedBox(),
                             width: 35,
                             height: 35,
-                            fit: BoxFit.cover,      
+                            fit: BoxFit.cover,
                           ),
                           BrandVSpace.gap10(),
                         ],
@@ -107,7 +115,13 @@ class _RetailBotIntroState extends ConsumerState<RetailBotIntro> {
                   top: (widget.height / 2) - 90,
                   left: 26,
                   right: 26,
-                  child: ChatWithUsWidget(),
+                  child: ChatWithUsWidget(
+                    buttonLabel:
+                        provider.initResponseModel?.botConfig?.buttonLabel,
+                    buttonMessage:
+                        provider.initResponseModel?.botConfig?.buttonMessage,
+                    onTap: widget.chatOnTap,
+                  ),
                 ),
               ],
             ),
@@ -125,13 +139,19 @@ class _RetailBotIntroState extends ConsumerState<RetailBotIntro> {
                     var item = provider
                         .initResponseModel
                         ?.conversationStarters![index];
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: QuestionTileWidget(
-                        message: item?.message,
-                        onTap: () {},
-                      ),
-                    );
+                    if (item?.isActive == true) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: QuestionTileWidget(
+                          message: item?.message,
+                          onTap: () {
+                            provider.setShowChat = true; TODO: check this
+                          },
+                        ),
+                      );
+                    } else {
+                      return SizedBox();
+                    }
                   },
                 ),
               ),

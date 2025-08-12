@@ -12,8 +12,9 @@ class SourceByteBot extends StatelessWidget {
   final String userId, botId;
   final double? width, height;
   final Function(String email, String password)? onLogin;
-  final Function(String)? sendMessageOnTap;
-  final Function(String?)? onBotMessage;
+  final Function(String message)? sendMessageOnTap;
+  final Function(String? message)? onBotMessage;
+  final bool showWelcomeScreen;
   const SourceByteBot({
     super.key,
     required this.userId,
@@ -23,6 +24,7 @@ class SourceByteBot extends StatelessWidget {
     this.onLogin,
     this.onBotMessage,
     this.sendMessageOnTap,
+    this.showWelcomeScreen = true,
   });
 
   @override
@@ -36,6 +38,7 @@ class SourceByteBot extends StatelessWidget {
         onBotMessage: onBotMessage,
         onLogin: onLogin,
         sendMessageOnTap: sendMessageOnTap,
+        showWelcomeScreen: showWelcomeScreen,
       ),
     );
   }

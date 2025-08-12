@@ -40,10 +40,24 @@ class RetailBotChat extends ConsumerStatefulWidget {
 class _RetailBotChatState extends ConsumerState<RetailBotChat> {
   late BotNotifierProvider provider;
 
+  Future<void> fetchData() async {
+    Future.delayed(const Duration(milliseconds: 200), () {
+      if (widget.scrollController != null) {
+        widget.scrollController!.animateTo(
+          widget.scrollController!.position.maxScrollExtent + 100,
+          duration: const Duration(milliseconds: 100),
+          curve: Curves.easeInSine,
+        );
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {});
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      fetchData();
+    });
   }
 
   @override

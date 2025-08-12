@@ -55,7 +55,7 @@ class ChatWithUsWidget extends StatelessWidget {
                   ),
                   BrandVSpace.gap10(),
                   Text(
-                    buttonLabel ?? 'We reply immediatly',
+                    buttonMessage ?? 'We reply immediatly',
                     style: TextStyle(
                       color: AppColors.greyB0,
                       fontSize: 16,

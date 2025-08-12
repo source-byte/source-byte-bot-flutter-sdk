@@ -21,6 +21,7 @@ class SourceByte extends ConsumerStatefulWidget {
   final Function(String email, String password)? onLogin;
   final Function(String)? sendMessageOnTap;
   final Function(String?)? onBotMessage;
+  final bool showWelcomeScreen;
   const SourceByte({
     super.key,
     required this.userId,
@@ -30,6 +31,7 @@ class SourceByte extends ConsumerStatefulWidget {
     this.onLogin,
     this.onBotMessage,
     this.sendMessageOnTap,
+    this.showWelcomeScreen = true,
   });
 
   @override
@@ -102,6 +104,7 @@ class _SourceByteState extends ConsumerState<SourceByte> {
           chatFocusNode: chatFocusNode,
           onSend: onChatSend,
           scrollController: scrollController,
+          showWelcomeScreen: widget.showWelcomeScreen,
         );
 
       case ThemeModeEnum.healthCare:
@@ -118,6 +121,7 @@ class _SourceByteState extends ConsumerState<SourceByte> {
           chatFocusNode: chatFocusNode,
           onSend: onChatSend,
           scrollController: scrollController,
+          showWelcomeScreen: widget.showWelcomeScreen,
         );
 
       default:
@@ -131,6 +135,7 @@ class _SourceByteState extends ConsumerState<SourceByte> {
           chatFocusNode: chatFocusNode,
           onSend: onChatSend,
           scrollController: scrollController,
+          showWelcomeScreen: widget.showWelcomeScreen,
         );
     }
   }
@@ -156,7 +161,6 @@ class _SourceByteState extends ConsumerState<SourceByte> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await init();
-      fetchData();
       listenChat();
     });
   }

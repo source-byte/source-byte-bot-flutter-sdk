@@ -18,9 +18,10 @@ class _ExampleScreenState extends State<ExampleScreen> {
     return SourceByteBot(
       userId: userId,
       botId: botId,
-      onBotMessage: (p0) {},
+      onBotMessage: (message) {},
+      sendMessageOnTap: (message) {},
       onLogin: (email, password) {},
-      sendMessageOnTap: (p0) {},
+      showWelcomeScreen: true,
     );
   }
 }
