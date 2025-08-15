@@ -78,6 +78,10 @@ class BotNotifierProvider extends StateNotifier<BotState> {
 
   bool get isSendMessageLoading => state.isSendMessageLoading;
 
+  bool get showLogin => state.showLogin;
+
+  bool get showIntro => state.showIntro;
+
   Future<void> initBot({required String botId, required String userId}) async {
     state = state.copyWith(
       isInitLoading: true,
@@ -194,5 +198,13 @@ class BotNotifierProvider extends StateNotifier<BotState> {
 
   set setShowChat(bool value) {
     state = state.copyWith(showChat: value);
+  }
+
+  set setShowLogin(bool value) {
+    state = state.copyWith(showLogin: value);
+  }
+
+  set setShowIntro(bool value) {
+    state = state.copyWith(showIntro: value);
   }
 }

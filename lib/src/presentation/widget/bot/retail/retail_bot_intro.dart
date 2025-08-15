@@ -10,6 +10,7 @@ import 'package:source_byte_bot/src/presentation/common/footer_widget.dart';
 import 'package:source_byte_bot/src/presentation/common/question_tile_widget.dart';
 import 'package:source_byte_bot/src/presentation/provider/bot_provider.dart';
 import 'package:source_byte_bot/theme/colors.dart';
+import 'package:source_byte_bot/util/enum/auth_type_enum.dart';
 
 class RetailBotIntro extends ConsumerStatefulWidget {
   const RetailBotIntro({
@@ -147,7 +148,12 @@ class _RetailBotIntroState extends ConsumerState<RetailBotIntro> {
                         child: QuestionTileWidget(
                           message: item?.message,
                           onTap: () {
-                            provider.setShowChat = true;
+                            provider.setShowIntro = false;
+                            if (provider.authType == AuthTypeEnum.open) {
+                              provider.setShowChat = true;
+                            } else {
+                              provider.setShowLogin = true;
+                            }
                           },
                         ),
                       );

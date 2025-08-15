@@ -13,6 +13,7 @@ import 'package:source_byte_bot/src/presentation/widget/bot/health/health_care_b
 import 'package:source_byte_bot/src/presentation/widget/bot/retail/retail_bot.dart';
 import 'package:source_byte_bot/theme/colors.dart';
 import 'package:source_byte_bot/util/chat/chat_manager.dart';
+import 'package:source_byte_bot/util/enum/auth_type_enum.dart';
 import 'package:source_byte_bot/util/enum/role_type_enum.dart';
 import 'package:source_byte_bot/util/enum/theme_mode_enum.dart';
 
@@ -89,10 +90,28 @@ class _SourceByteState extends ConsumerState<SourceByte> {
 
   ///[init] Defining the bot with bot config
   Future<void> init() async {
-    if (!widget.showWelcomeScreen) {
-      provider.setShowChat = true;
-    }
     await provider.initBot(botId: widget.botId, userId: widget.userId);
+    if (provider.initResponseModel != null) {
+      if (provider.initResponseModel?.botConfig?.authenticationType ==
+          AuthTypeEnum.open.name) {
+        provider.setShowLogin = false;
+        if (widget.showWelcomeScreen) {
+          provider.setShowChat = false;
+          provider.setShowIntro = true;
+        } else {
+          provider.setShowIntro = false;
+          provider.setShowChat = true;
+        }
+      } else if (provider.initResponseModel?.botConfig?.authenticationType ==
+          AuthTypeEnum.closed.name) {
+        provider.setShowLogin = true;
+        if (widget.showWelcomeScreen) {
+          provider.setShowIntro = true;
+        } else {
+          provider.setShowIntro = false;
+        }
+      }
+    }
   }
 
   Widget child(ThemeModeEnum mode) {
@@ -108,7 +127,6 @@ class _SourceByteState extends ConsumerState<SourceByte> {
           chatFocusNode: chatFocusNode,
           onSend: onChatSend,
           scrollController: scrollController,
-          showWelcomeScreen: widget.showWelcomeScreen,
         );
 
       case ThemeModeEnum.healthCare:
@@ -125,7 +143,6 @@ class _SourceByteState extends ConsumerState<SourceByte> {
           chatFocusNode: chatFocusNode,
           onSend: onChatSend,
           scrollController: scrollController,
-          showWelcomeScreen: widget.showWelcomeScreen,
         );
 
       default:
@@ -139,7 +156,6 @@ class _SourceByteState extends ConsumerState<SourceByte> {
           chatFocusNode: chatFocusNode,
           onSend: onChatSend,
           scrollController: scrollController,
-          showWelcomeScreen: widget.showWelcomeScreen,
         );
     }
   }

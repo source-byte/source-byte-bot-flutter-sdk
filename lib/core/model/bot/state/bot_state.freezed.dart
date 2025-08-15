@@ -29,6 +29,8 @@ mixin _$BotState {
   bool get isLoginError => throw _privateConstructorUsedError;
   String? get loginErrorMessage => throw _privateConstructorUsedError;
   bool get isSendMessageLoading => throw _privateConstructorUsedError;
+  bool get showLogin => throw _privateConstructorUsedError;
+  bool get showIntro => throw _privateConstructorUsedError;
 
   /// Create a copy of BotState
   /// with the given fields replaced by the non-null parameter values.
@@ -54,6 +56,8 @@ abstract class $BotStateCopyWith<$Res> {
     bool isLoginError,
     String? loginErrorMessage,
     bool isSendMessageLoading,
+    bool showLogin,
+    bool showIntro,
   });
 
   $InitResponseModelCopyWith<$Res>? get initResponseModel;
@@ -85,6 +89,8 @@ class _$BotStateCopyWithImpl<$Res, $Val extends BotState>
     Object? isLoginError = null,
     Object? loginErrorMessage = freezed,
     Object? isSendMessageLoading = null,
+    Object? showLogin = null,
+    Object? showIntro = null,
   }) {
     return _then(
       _value.copyWith(
@@ -132,6 +138,14 @@ class _$BotStateCopyWithImpl<$Res, $Val extends BotState>
                 ? _value.isSendMessageLoading
                 : isSendMessageLoading // ignore: cast_nullable_to_non_nullable
                       as bool,
+            showLogin: null == showLogin
+                ? _value.showLogin
+                : showLogin // ignore: cast_nullable_to_non_nullable
+                      as bool,
+            showIntro: null == showIntro
+                ? _value.showIntro
+                : showIntro // ignore: cast_nullable_to_non_nullable
+                      as bool,
           )
           as $Val,
     );
@@ -173,6 +187,8 @@ abstract class _$$BotStateImplCopyWith<$Res>
     bool isLoginError,
     String? loginErrorMessage,
     bool isSendMessageLoading,
+    bool showLogin,
+    bool showIntro,
   });
 
   @override
@@ -204,6 +220,8 @@ class __$$BotStateImplCopyWithImpl<$Res>
     Object? isLoginError = null,
     Object? loginErrorMessage = freezed,
     Object? isSendMessageLoading = null,
+    Object? showLogin = null,
+    Object? showIntro = null,
   }) {
     return _then(
       _$BotStateImpl(
@@ -251,6 +269,14 @@ class __$$BotStateImplCopyWithImpl<$Res>
             ? _value.isSendMessageLoading
             : isSendMessageLoading // ignore: cast_nullable_to_non_nullable
                   as bool,
+        showLogin: null == showLogin
+            ? _value.showLogin
+            : showLogin // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        showIntro: null == showIntro
+            ? _value.showIntro
+            : showIntro // ignore: cast_nullable_to_non_nullable
+                  as bool,
       ),
     );
   }
@@ -271,6 +297,8 @@ class _$BotStateImpl implements _BotState {
     this.isLoginError = false,
     this.loginErrorMessage,
     this.isSendMessageLoading = false,
+    this.showLogin = false,
+    this.showIntro = false,
   });
 
   @override
@@ -302,10 +330,16 @@ class _$BotStateImpl implements _BotState {
   @override
   @JsonKey()
   final bool isSendMessageLoading;
+  @override
+  @JsonKey()
+  final bool showLogin;
+  @override
+  @JsonKey()
+  final bool showIntro;
 
   @override
   String toString() {
-    return 'BotState(isInitLoading: $isInitLoading, isInitError: $isInitError, initErrorMessage: $initErrorMessage, initResponseModel: $initResponseModel, themeMode: $themeMode, themeData: $themeData, showChat: $showChat, isLoginLoading: $isLoginLoading, isLoginError: $isLoginError, loginErrorMessage: $loginErrorMessage, isSendMessageLoading: $isSendMessageLoading)';
+    return 'BotState(isInitLoading: $isInitLoading, isInitError: $isInitError, initErrorMessage: $initErrorMessage, initResponseModel: $initResponseModel, themeMode: $themeMode, themeData: $themeData, showChat: $showChat, isLoginLoading: $isLoginLoading, isLoginError: $isLoginError, loginErrorMessage: $loginErrorMessage, isSendMessageLoading: $isSendMessageLoading, showLogin: $showLogin, showIntro: $showIntro)';
   }
 
   @override
@@ -334,7 +368,11 @@ class _$BotStateImpl implements _BotState {
             (identical(other.loginErrorMessage, loginErrorMessage) ||
                 other.loginErrorMessage == loginErrorMessage) &&
             (identical(other.isSendMessageLoading, isSendMessageLoading) ||
-                other.isSendMessageLoading == isSendMessageLoading));
+                other.isSendMessageLoading == isSendMessageLoading) &&
+            (identical(other.showLogin, showLogin) ||
+                other.showLogin == showLogin) &&
+            (identical(other.showIntro, showIntro) ||
+                other.showIntro == showIntro));
   }
 
   @override
@@ -351,6 +389,8 @@ class _$BotStateImpl implements _BotState {
     isLoginError,
     loginErrorMessage,
     isSendMessageLoading,
+    showLogin,
+    showIntro,
   );
 
   /// Create a copy of BotState
@@ -375,6 +415,8 @@ abstract class _BotState implements BotState {
     final bool isLoginError,
     final String? loginErrorMessage,
     final bool isSendMessageLoading,
+    final bool showLogin,
+    final bool showIntro,
   }) = _$BotStateImpl;
 
   @override
@@ -399,6 +441,10 @@ abstract class _BotState implements BotState {
   String? get loginErrorMessage;
   @override
   bool get isSendMessageLoading;
+  @override
+  bool get showLogin;
+  @override
+  bool get showIntro;
 
   /// Create a copy of BotState
   /// with the given fields replaced by the non-null parameter values.

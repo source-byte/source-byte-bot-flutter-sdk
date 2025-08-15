@@ -16,10 +16,12 @@ class BotState with _$BotState {
     InitResponseModel? initResponseModel,
     @Default(ThemeModeEnum.others) ThemeModeEnum themeMode,
     ThemeData? themeData,
-    @Default(false) bool showChat,
     @Default(false) bool isLoginLoading,
     @Default(false) bool isLoginError,
     String? loginErrorMessage,
     @Default(false) bool isSendMessageLoading,
+    @Default(false) bool showChat,
+    @Default(false) bool showLogin,
+    @Default(false) bool showIntro,
   }) = _BotState;
 }
