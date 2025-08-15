@@ -8,6 +8,7 @@ import 'package:source_byte_bot/core/model/bot/request/send_message/send_message
 import 'package:source_byte_bot/core/model/bot/response/chat/chat_response_model.dart';
 import 'package:source_byte_bot/core/network/endpoint/bot_endpoint.dart';
 import 'package:source_byte_bot/core/network/network.dart';
+import 'package:source_byte_bot/util/enum/role_type_enum.dart';
 
 abstract class WebSocketManager {
   static final StreamController<ChatResponseModel> _chatController =
@@ -21,7 +22,7 @@ abstract class WebSocketManager {
   }) async {
     _chatController.add(
       ChatResponseModel(
-        from: Participant(role: 'user'),
+        from: Participant(role: RoleTypeEnum.user.name),
         message: requestModel.message,
         timestamp: DateTime.now(),
       ),
@@ -43,18 +44,34 @@ abstract class WebSocketManager {
           Map<String, dynamic> map = jsonDecode(res);
           _chatController.add(
             ChatResponseModel(
-              from: Participant(id: map["bot_id"], role: 'bot'),
+              from: Participant(id: map["bot_id"], role: RoleTypeEnum.bot.name),
               message: map["full_response"],
               timestamp: DateTime.now(),
-              to: Participant(id: 'user'),
+              to: Participant(id: RoleTypeEnum.user.name),
             ),
           );
         } catch (e) {
-          //
+          Map<String, dynamic> map = jsonDecode(onData);
+
+          _chatController.add(
+            ChatResponseModel(
+              from: Participant(id: null, role: RoleTypeEnum.bot.name),
+              message: map["message"],
+              timestamp: DateTime.now(),
+              to: Participant(id: RoleTypeEnum.user.name),
+            ),
+          );
         }
       });
     } catch (e) {
-      //
+      _chatController.add(
+        ChatResponseModel(
+          from: Participant(id: null, role: RoleTypeEnum.bot.name),
+          message: 'Something went wrong...',
+          timestamp: DateTime.now(),
+          to: Participant(id: RoleTypeEnum.user.name),
+        ),
+      );
     }
   }
 }

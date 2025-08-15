@@ -120,7 +120,9 @@ class _RetailBotIntroState extends ConsumerState<RetailBotIntro> {
                         provider.initResponseModel?.botConfig?.buttonLabel,
                     buttonMessage:
                         provider.initResponseModel?.botConfig?.buttonMessage,
-                    onTap: widget.chatOnTap,
+                    onTap: () {
+                      widget.chatOnTap?.call();
+                    },
                   ),
                 ),
               ],
@@ -145,7 +147,7 @@ class _RetailBotIntroState extends ConsumerState<RetailBotIntro> {
                         child: QuestionTileWidget(
                           message: item?.message,
                           onTap: () {
-                            provider.setShowChat = true; TODO: check this
+                            provider.setShowChat = true;
                           },
                         ),
                       );

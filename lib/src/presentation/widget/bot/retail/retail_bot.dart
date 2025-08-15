@@ -54,8 +54,14 @@ class _RetailBotState extends ConsumerState<RetailBot> {
     }
     return Column(
       children: [
-        if (widget.showWelcomeScreen)
-          RetailBotIntro(width: width, height: height)
+        if (widget.showWelcomeScreen && !provider.showChat)
+          RetailBotIntro(
+            width: width,
+            height: height,
+            chatOnTap: () {
+              provider.setShowChat = true;
+            },
+          )
         else if (provider.authType == AuthTypeEnum.closed && !provider.showChat)
           RetailBotLogin(
             width: width,

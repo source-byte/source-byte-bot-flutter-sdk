@@ -84,7 +84,6 @@ class BotNotifierProvider extends StateNotifier<BotState> {
       initErrorMessage: null,
       initResponseModel: null,
       isInitError: false,
-      showChat: false,
     );
 
     var requestModel = InitRequestModel(
@@ -146,14 +145,17 @@ class BotNotifierProvider extends StateNotifier<BotState> {
     }
   }
 
-  Future<void> sendMessage({required String message}) async {
+  Future<void> sendMessage({
+    required String message,
+    required String userId,
+  }) async {
     state = state.copyWith(isSendMessageLoading: true);
 
     var requestModel = SendMessageRequestModel(
       botId: initResponseModel?.bot?.id,
       message: message,
       sessionId: initResponseModel?.sessionId,
-      userId: initResponseModel?.user,
+      userId: userId,
     );
 
     await WebSocketManager.sendMessage(

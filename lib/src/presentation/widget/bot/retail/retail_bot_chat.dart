@@ -14,6 +14,7 @@ import 'package:source_byte_bot/src/presentation/common/footer_widget.dart';
 import 'package:source_byte_bot/theme/colors.dart';
 import 'package:source_byte_bot/util/assets/assets.dart';
 import 'package:source_byte_bot/util/chat/chat_manager.dart';
+import 'package:source_byte_bot/util/enum/role_type_enum.dart';
 import 'package:source_byte_bot/util/formator/date_formator.dart';
 
 class RetailBotChat extends ConsumerStatefulWidget {
@@ -91,9 +92,10 @@ class _RetailBotChatState extends ConsumerState<RetailBotChat> {
                           itemBuilder: (context, index) {
                             var item = ChatManager().chat[index];
                             return ChatTile(
-                              isIncoming: item.from?.role == 'bot',
+                              isIncoming:
+                                  item.from?.role == RoleTypeEnum.bot.name,
                               messages: item.message ?? '--',
-                              imgUrl: item.from?.role == 'bot'
+                              imgUrl: item.from?.role == RoleTypeEnum.bot.name
                                   ? provider.initResponseModel?.avatar?.image
                                   : '',
                               timeStamp: item.timestamp != null

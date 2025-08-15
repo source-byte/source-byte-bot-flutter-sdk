@@ -13,6 +13,7 @@ import 'package:source_byte_bot/src/presentation/widget/bot/health/health_care_b
 import 'package:source_byte_bot/src/presentation/widget/bot/retail/retail_bot.dart';
 import 'package:source_byte_bot/theme/colors.dart';
 import 'package:source_byte_bot/util/chat/chat_manager.dart';
+import 'package:source_byte_bot/util/enum/role_type_enum.dart';
 import 'package:source_byte_bot/util/enum/theme_mode_enum.dart';
 
 class SourceByte extends ConsumerStatefulWidget {
@@ -83,11 +84,14 @@ class _SourceByteState extends ConsumerState<SourceByte> {
     }
     chatControlled.clear();
     widget.sendMessageOnTap?.call(value);
-    await provider.sendMessage(message: value);
+    await provider.sendMessage(message: value, userId: widget.userId);
   }
 
   ///[init] Defining the bot with bot config
   Future<void> init() async {
+    if (!widget.showWelcomeScreen) {
+      provider.setShowChat = true;
+    }
     await provider.initBot(botId: widget.botId, userId: widget.userId);
   }
 
@@ -143,7 +147,7 @@ class _SourceByteState extends ConsumerState<SourceByte> {
   Future<void> listenChat() async {
     _chatSubscription = WebSocketManager.chatStream.listen((data) {
       ChatManager().addChat(chat: data);
-      if (ChatManager().chat.last.from?.role == 'bot') {
+      if (ChatManager().chat.last.from?.role == RoleTypeEnum.bot.name) {
         widget.onBotMessage?.call(ChatManager().chat.last.message);
       }
       Future.delayed(const Duration(milliseconds: 200), () {
