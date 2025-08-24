@@ -31,6 +31,7 @@ class ProfileAvatar extends StatelessWidget {
                 },
                 placeholder: (context, url) =>
                     const SizedBox(width: 50, height: 50),
+                errorListener: (value) {},
               ),
             ),
           )

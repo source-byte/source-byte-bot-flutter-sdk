@@ -22,6 +22,7 @@ class _ExampleScreenState extends State<ExampleScreen> {
       sendMessageOnTap: (message) {},
       onLogin: (email, password) {},
       showWelcomeScreen: true,
+      baseUrl: 'https://dev.sourcebytes.ai/api/v1',
     );
   }
 }

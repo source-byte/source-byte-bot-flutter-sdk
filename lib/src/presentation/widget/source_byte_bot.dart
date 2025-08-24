@@ -7,6 +7,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:source_byte_bot/app_config.dart';
 import 'package:source_byte_bot/core/network/web_scoket/web_socket_manager.dart';
 import 'package:source_byte_bot/src/presentation/provider/bot_provider.dart';
 import 'package:source_byte_bot/src/presentation/widget/bot/health/health_care_bot.dart';
@@ -18,7 +19,7 @@ import 'package:source_byte_bot/util/enum/role_type_enum.dart';
 import 'package:source_byte_bot/util/enum/theme_mode_enum.dart';
 
 class SourceByte extends ConsumerStatefulWidget {
-  final String userId, botId;
+  final String userId, botId, baseUrl;
   final double? width, height;
   final Function(String email, String password)? onLogin;
   final Function(String)? sendMessageOnTap;
@@ -28,6 +29,7 @@ class SourceByte extends ConsumerStatefulWidget {
     super.key,
     required this.userId,
     required this.botId,
+    required this.baseUrl,
     this.width,
     this.height,
     this.onLogin,
@@ -54,6 +56,10 @@ class _SourceByteState extends ConsumerState<SourceByte> {
   ScrollController scrollController = ScrollController();
 
   StreamSubscription? _chatSubscription;
+
+  void fetchBaseUrl() {
+    baseUrl = widget.baseUrl;
+  }
 
   Future<void> fetchData() async {
     Future.delayed(const Duration(milliseconds: 200), () {
@@ -179,6 +185,7 @@ class _SourceByteState extends ConsumerState<SourceByte> {
   @override
   void initState() {
     super.initState();
+    fetchBaseUrl();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await init();
       listenChat();
