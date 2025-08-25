@@ -1,9 +1,10 @@
 // Copyright (c) 2025, Indo-Sakura Software Pvt Ltd. All rights reserved.
 // Created By Suresh M, 08/08/2025
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:source_byte_bot/src/presentation/common/brand_text.dart';
 import 'package:source_byte_bot/theme/colors.dart';
+import 'package:source_byte_bot/util/assets/assets.dart';
 
 class FooterWidget extends StatelessWidget {
   final String? logo;
@@ -16,36 +17,24 @@ class FooterWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            'POWERED BY',
-            style: TextStyle(
-              color: AppColors.grey9D,
-              fontSize: 14,
-              fontFamily: "Gilroy",
+          BrandText('POWERED BY', color: AppColors.grey9D, fontSize: 14),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Image.asset(
+              Assets.sourceBytesLogo,
+              width: 18,
+              height: 18,
+              fit: BoxFit.cover,
+              package: 'source_byte_bot',
+              errorBuilder: (context, error, stackTrace) => const SizedBox(),
             ),
           ),
-          if (logo != null) ...[
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: CachedNetworkImage(
-                imageUrl: logo!,
-                errorWidget: (context, url, error) => const SizedBox(),
-                placeholder: (context, url) => SizedBox(),
-                width: 18,
-                height: 18,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ],
 
-          Text(
+          BrandText(
             'SourceByte.AI',
-            style: TextStyle(
-              color: AppColors.grey9D,
-              fontWeight: FontWeight.w700,
-              fontSize: 14,
-              fontFamily: "Gilroy",
-            ),
+            color: AppColors.grey9D,
+            fontWeight: FontWeight.w700,
+            fontSize: 14,
           ),
         ],
       ),

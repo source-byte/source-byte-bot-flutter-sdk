@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:source_byte_bot/src/presentation/common/bot_header.dart';
+import 'package:source_byte_bot/src/presentation/common/brand_text.dart';
 import 'package:source_byte_bot/src/presentation/common/brand_text_field.dart';
 import 'package:source_byte_bot/src/presentation/common/brand_vertical_space.dart';
 import 'package:source_byte_bot/src/presentation/common/footer_widget.dart';
@@ -52,13 +53,10 @@ class _RetailBotLoginState extends ConsumerState<RetailBotLogin> {
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Column(
                 children: [
-                  Text(
+                  BrandText(
                     'Log in to start chatting with your AI chatbot:',
-                    style: TextStyle(
-                      color: AppColors.black.withAlpha(200),
-                      fontSize: 16,
-                      fontFamily: "Gilroy",
-                    ),
+                    fontSize: 16,
+                    color: AppColors.black.withAlpha(200),
                   ),
                   BrandVSpace.gap16(),
                   BrandTextField(
@@ -74,13 +72,9 @@ class _RetailBotLoginState extends ConsumerState<RetailBotLogin> {
                   ),
                   BrandVSpace.gap16(),
                   if (widget.errorMessage != null)
-                    Text(
+                    BrandText(
                       widget.errorMessage!,
-                      style: TextStyle(
-                        color: AppColors.red55.withAlpha(200),
-                        fontSize: 16,
-                        fontFamily: "Gilroy",
-                      ),
+                      color: AppColors.red55.withAlpha(200),
                     ),
                   BrandVSpace.gap16(),
                   InkWell(
@@ -97,13 +91,11 @@ class _RetailBotLoginState extends ConsumerState<RetailBotLogin> {
                             ),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(vertical: 10),
-                              child: Text(
+                              child: BrandText(
                                 'Send',
+                                color: AppColors.white,
+                                fontSize: 18,
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: AppColors.white,
-                                  fontSize: 18,
-                                ),
                               ),
                             ),
                           ),

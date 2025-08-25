@@ -99,7 +99,7 @@ class _RetailBotChatState extends ConsumerState<RetailBotChat> {
                                   ? provider.initResponseModel?.avatar?.image
                                   : '',
                               timeStamp: item.timestamp != null
-                                  ? DateFormats.dateTime.format(item.timestamp!)
+                                  ? DateFormats.time12A.format(item.timestamp!)
                                   : '',
                             );
                           },

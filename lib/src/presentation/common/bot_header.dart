@@ -4,6 +4,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:source_byte_bot/src/presentation/common/brand_horizontal_space.dart';
+import 'package:source_byte_bot/src/presentation/common/brand_text.dart';
 import 'package:source_byte_bot/src/presentation/common/brand_vertical_space.dart';
 import 'package:source_byte_bot/theme/colors.dart';
 
@@ -27,13 +28,16 @@ class BotHeader extends StatelessWidget {
           child: Row(
             children: [
               if (logo != null) ...[
-                CachedNetworkImage(
-                  imageUrl: logo!,
-                  errorWidget: (context, url, error) => const SizedBox(),
-                  placeholder: (context, url) => SizedBox(),
-                  width: 35,
-                  height: 35,
-                  fit: BoxFit.cover,
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: CachedNetworkImage(
+                    imageUrl: logo!,
+                    errorWidget: (context, url, error) => const SizedBox(),
+                    placeholder: (context, url) => SizedBox(),
+                    width: 35,
+                    height: 35,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ],
               BrandHSpace.gap10(),
@@ -41,22 +45,16 @@ class BotHeader extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    BrandText(
                       title,
-                      style: TextStyle(
-                        color: AppColors.black,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 20,
-                        fontFamily: "Gilroy",
-                      ),
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.black,
                     ),
-                    Text(
+                    BrandText(
                       subTitle,
-                      style: TextStyle(
-                        color: AppColors.black.withAlpha(200),
-                        fontSize: 14,
-                        fontFamily: "Gilroy",
-                      ),
+                      color: AppColors.black.withAlpha(200),
+                      fontSize: 14,
                     ),
                   ],
                 ),

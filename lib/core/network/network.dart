@@ -2,12 +2,12 @@
 // Created By Suresh M, 07/08/2025
 
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 import 'package:source_byte_bot/app_config.dart';
 import 'package:source_byte_bot/core/network/network_status.dart';
 import 'package:source_byte_bot/util/auth/auth_manager.dart';
+import 'package:source_byte_bot/util/utils.dart';
 
 abstract class NetworkClient {
   static Future<http.Response?> get({required String endPoint}) async {
@@ -18,8 +18,7 @@ abstract class NetworkClient {
         "Authorization": "Token ${AuthManager().token}",
       },
     );
-    // TODO: remove before prod
-    log(
+    debugPrint(
       "Request:  $baseUrl$endPoint \nResponse: ${response.body}\n\ntoken:  ${AuthManager().token}",
     );
 
@@ -53,8 +52,7 @@ abstract class NetworkClient {
         "Authorization": "Token ${AuthManager().token}",
       },
     );
-    // TODO: remove before prod
-    log(
+    debugPrint(
       "Request:  $baseUrl$endPoint ${json.encode(body)} \n\nResponse: ${response.body}\n\ntoken:  ${AuthManager().token}",
     );
 

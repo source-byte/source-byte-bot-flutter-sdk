@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:source_byte_bot/src/presentation/common/brand_text.dart';
 import 'package:source_byte_bot/src/presentation/common/brand_vertical_space.dart';
 import 'package:source_byte_bot/src/presentation/common/chat_with_us_widget.dart';
 import 'package:source_byte_bot/src/presentation/common/footer_widget.dart';
@@ -59,35 +60,32 @@ class _RetailBotIntroState extends ConsumerState<RetailBotIntro> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         if (provider.logo != null) ...[
-                          CachedNetworkImage(
-                            imageUrl: provider.logo!,
-                            errorWidget: (context, url, error) =>
-                                const SizedBox(),
-                            placeholder: (context, url) => SizedBox(),
-                            width: 35,
-                            height: 35,
-                            fit: BoxFit.cover,
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: CachedNetworkImage(
+                              imageUrl: provider.logo!,
+                              errorWidget: (context, url, error) =>
+                                  const SizedBox(),
+                              placeholder: (context, url) => SizedBox(),
+                              width: 35,
+                              height: 35,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                           BrandVSpace.gap10(),
                         ],
-                        Text(
+                        BrandText(
                           provider.title,
-                          style: TextStyle(
-                            color: Color(provider.textColor),
-                            fontWeight: FontWeight.w600,
-                            fontSize: 20,
-                            fontFamily: "Gilroy",
-                          ),
+                          color: Color(provider.textColor),
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
                         ),
                         BrandVSpace.gap10(),
-                        Text(
+                        BrandText(
                           provider.subTitle,
-                          style: TextStyle(
-                            color: Color(provider.textColor),
-                            fontWeight: FontWeight.w500,
-                            fontSize: 20,
-                            fontFamily: "Gilroy",
-                          ),
+                          color: Color(provider.textColor),
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
                         ),
                       ],
                     ),

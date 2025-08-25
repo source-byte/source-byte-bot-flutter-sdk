@@ -82,7 +82,7 @@ class BotNotifierProvider extends StateNotifier<BotState> {
 
   bool get showIntro => state.showIntro;
 
-  Future<void> initBot({required String botId, required String userId}) async {
+  Future<void> initBot({required String botId, String? userId}) async {
     state = state.copyWith(
       isInitLoading: true,
       initErrorMessage: null,
@@ -149,10 +149,7 @@ class BotNotifierProvider extends StateNotifier<BotState> {
     }
   }
 
-  Future<void> sendMessage({
-    required String message,
-    required String userId,
-  }) async {
+  Future<void> sendMessage({required String message, String? userId}) async {
     state = state.copyWith(isSendMessageLoading: true);
 
     var requestModel = SendMessageRequestModel(

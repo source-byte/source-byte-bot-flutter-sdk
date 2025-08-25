@@ -3,4 +3,5 @@
 
 abstract class Assets {
   static const typingLottie = 'lib/assets/lottie/chat_typing_lottie.json';
+  static const sourceBytesLogo = 'lib/assets/icon/logo.png';
 }

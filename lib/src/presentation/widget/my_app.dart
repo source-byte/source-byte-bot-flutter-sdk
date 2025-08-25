@@ -5,11 +5,12 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:source_byte_bot/src/presentation/widget/source_byte_bot.dart';
 
-///[userId] and [botId] is the id which is needed to initialize the bot
+/// [botId] is the id which is needed to initialize the bot
 ///
 ///[height] should be minimum [375]
 class SourceByteBot extends StatelessWidget {
-  final String userId, botId, baseUrl;
+  final String botId, baseUrl;
+  final String? userId;
   final double? width, height;
   final Function(String email, String password)? onLogin;
   final Function(String message)? sendMessageOnTap;
@@ -17,7 +18,7 @@ class SourceByteBot extends StatelessWidget {
   final bool showWelcomeScreen;
   const SourceByteBot({
     super.key,
-    required this.userId,
+    this.userId,
     required this.botId,
     required this.baseUrl,
     this.width,
@@ -34,7 +35,7 @@ class SourceByteBot extends StatelessWidget {
       child: SourceByte(
         botId: botId,
         userId: userId,
-        baseUrl:baseUrl,
+        baseUrl: baseUrl,
         width: width,
         height: height,
         onBotMessage: onBotMessage,

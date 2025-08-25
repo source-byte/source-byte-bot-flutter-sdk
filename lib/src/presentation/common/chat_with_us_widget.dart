@@ -2,6 +2,7 @@
 // Created By Suresh M, 08/08/2025
 
 import 'package:flutter/material.dart';
+import 'package:source_byte_bot/src/presentation/common/brand_text.dart';
 import 'package:source_byte_bot/src/presentation/common/brand_vertical_space.dart';
 import 'package:source_byte_bot/theme/colors.dart';
 
@@ -45,22 +46,14 @@ class ChatWithUsWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  BrandText(
+                    color: AppColors.black,
                     buttonLabel ?? 'Chat with us',
-                    style: TextStyle(
-                      color: AppColors.black,
-                      fontSize: 16,
-                      fontFamily: "Gilroy",
-                    ),
                   ),
                   BrandVSpace.gap10(),
-                  Text(
+                  BrandText(
                     buttonMessage ?? 'We reply immediatly',
-                    style: TextStyle(
-                      color: AppColors.greyB0,
-                      fontSize: 16,
-                      fontFamily: "Gilroy",
-                    ),
+                    color: AppColors.greyB0,
                   ),
                 ],
               ),

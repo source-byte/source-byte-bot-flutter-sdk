@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:source_byte_bot/app_config.dart';
 import 'package:source_byte_bot/core/network/web_scoket/web_socket_manager.dart';
+import 'package:source_byte_bot/src/presentation/common/brand_text.dart';
 import 'package:source_byte_bot/src/presentation/provider/bot_provider.dart';
 import 'package:source_byte_bot/src/presentation/widget/bot/health/health_care_bot.dart';
 import 'package:source_byte_bot/src/presentation/widget/bot/retail/retail_bot.dart';
@@ -19,7 +20,8 @@ import 'package:source_byte_bot/util/enum/role_type_enum.dart';
 import 'package:source_byte_bot/util/enum/theme_mode_enum.dart';
 
 class SourceByte extends ConsumerStatefulWidget {
-  final String userId, botId, baseUrl;
+  final String botId, baseUrl;
+  final String? userId;
   final double? width, height;
   final Function(String email, String password)? onLogin;
   final Function(String)? sendMessageOnTap;
@@ -27,7 +29,7 @@ class SourceByte extends ConsumerStatefulWidget {
   final bool showWelcomeScreen;
   const SourceByte({
     super.key,
-    required this.userId,
+    this.userId,
     required this.botId,
     required this.baseUrl,
     this.width,
@@ -217,14 +219,11 @@ class _SourceByteState extends ConsumerState<SourceByte> {
               child(provider.themeMode),
             ] else ...[
               Center(
-                child: Text(
+                child: BrandText(
                   provider.initErrorMessage ?? 'Something went wrong',
-                  style: TextStyle(
-                    color: Color(provider.textColor),
-                    fontWeight: FontWeight.w600,
-                    fontSize: 20,
-                    fontFamily: "Gilroy",
-                  ),
+                  fontSize: 20,
+                  color: Color(provider.textColor),
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ],

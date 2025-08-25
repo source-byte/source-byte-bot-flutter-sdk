@@ -9,6 +9,7 @@ abstract class DateFormats {
   static final dateTime = DateFormat('EEE, MMM d,h:mm a');
   static final dMMMM = DateFormat("d, MMMM");
   static final time = DateFormat("HH:mm");
+  static final time12A = DateFormat("hh:mm a");
   static final yyyyMMDD = DateFormat('yyyy-MM-dd');
   static final eeeDDMMM = DateFormat(
     "EEE dd MMM",

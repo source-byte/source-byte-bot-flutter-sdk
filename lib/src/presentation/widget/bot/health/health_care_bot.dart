@@ -5,6 +5,7 @@ library;
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:source_byte_bot/src/presentation/common/brand_text.dart';
 
 class HealthCareBot extends ConsumerStatefulWidget {
   const HealthCareBot({super.key});
@@ -16,6 +17,6 @@ class HealthCareBot extends ConsumerStatefulWidget {
 class _HealthCareBotState extends ConsumerState<HealthCareBot> {
   @override
   Widget build(BuildContext context) {
-    return Text('health care');
+    return BrandText('health care');
   }
 }

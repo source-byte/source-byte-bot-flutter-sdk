@@ -2,8 +2,8 @@
 // Created By Suresh M, 08/08/2025
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cached_network_svg_image/cached_network_svg_image.dart';
 import 'package:flutter/material.dart';
-import 'package:source_byte_bot/theme/colors.dart';
 
 class ProfileAvatar extends StatelessWidget {
   final String? imgUrl;
@@ -19,31 +19,35 @@ class ProfileAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        if (imgUrl != null)
-          SizedBox(
-            width: width,
-            height: height,
-            child: ClipOval(
-              child: CachedNetworkImage(
-                imageUrl: imgUrl ?? '',
-                errorWidget: (context, url, error) {
-                  return Icon(Icons.person);
-                },
-                placeholder: (context, url) =>
-                    const SizedBox(width: 50, height: 50),
-                errorListener: (value) {},
+        if (imgUrl != null) ...[
+          if (imgUrl!.contains('.svg')) ...[
+            SizedBox(
+              width: width,
+              height: height,
+              child: ClipOval(
+                child: CachedNetworkSVGImage(
+                  imgUrl ?? '',
+                  errorWidget: Icon(Icons.person),
+                ),
               ),
             ),
-          )
-        else
-          ClipOval(
-            child: Container(
+          ] else
+            SizedBox(
               width: width,
-              height: width,
-              color: AppColors.greyFD,
-              child: Center(child: Icon(Icons.image)),
+              height: height,
+              child: ClipOval(
+                child: CachedNetworkImage(
+                  imageUrl: imgUrl ?? '',
+                  errorWidget: (context, url, error) {
+                    return Icon(Icons.person);
+                  },
+                  placeholder: (context, url) =>
+                      const SizedBox(width: 50, height: 50),
+                  errorListener: (value) {},
+                ),
+              ),
             ),
-          ),
+        ],
       ],
     );
   }
